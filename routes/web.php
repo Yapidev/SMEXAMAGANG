@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PembimbingController;
+use App\Http\Controllers\PrakerinController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TempatMagangController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +25,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('home', 'index')->name('home');
+    });
+
+    // Route Controller Siswa
+    Route::controller(SiswaController::class)->group(function () {
+        Route::get('list-siswa', 'listSiswa')->name('list-siswa');
+        // Route::get('create-siswa', 'createSiswa')->name('create-siswa');
+    });
+
+    Route::controller(PembimbingController::class)->group(function () {
+    });
+    Route::controller(PrakerinController::class)->group(function () {
+    });
+    Route::controller(TempatMagangController::class)->group(function () {
+    });
+});
