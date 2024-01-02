@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->string('jabatan');
+            $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->string('jurusan');
             $table->foreignId('prakerins_id')->constrained('prakerins');
             $table->timestamps();
