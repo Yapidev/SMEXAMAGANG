@@ -65,21 +65,21 @@
               </a>
             </li>
             <!-- ============================= -->
-            <!-- TEMPAT MAGANG -->
+            <!-- TEMPAT PRAKERIN -->
             <!-- ============================= -->
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">TEMPAT MAGANG</span>
+              <span class="hide-menu">TEMPAT PRAKERIN</span>
             </li>
             <!-- =================== -->
-            <!-- TEMPAT MAGANG -->
+            <!-- TEMPAT PRAKERIN -->
             <!-- =================== -->
             <li class="sidebar-item">
               <a class="sidebar-link" href="index-2.html" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-skyscraper"></i>
                 </span>
-                <span class="hide-menu">List Tempat Magang</span>
+                <span class="hide-menu">List Tempat Prakerin</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -87,18 +87,18 @@
                 <span>
                   <i class="ti ti-map-pin"></i>
                 </span>
-                <span class="hide-menu">Tambah Tempat Magang</span>
+                <span class="hide-menu">Tambah Tempat Prakerin</span>
               </a>
             </li>
             <!-- ============================= -->
-            <!-- SISWA MAGANG -->
+            <!-- SISWA PRAKERIN -->
             <!-- ============================= -->
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">SISWA MAGANG</span>
+              <span class="hide-menu">SISWA PRAKERIN</span>
             </li>
             <!-- =================== -->
-            <!-- SISWA MAGANG -->
+            <!-- SISWA PRAKERIN -->
             <!-- =================== -->
             <li class="sidebar-item">
               <a class="sidebar-link" href="index-2.html" aria-expanded="false">
@@ -117,14 +117,14 @@
               </a>
             </li>
             <!-- ============================= -->
-            <!-- PEMBIMBING MAGANG -->
+            <!-- PEMBIMBING PRAKERIN -->
             <!-- ============================= -->
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">PEMBIMBING MAGANG</span>
+              <span class="hide-menu">PEMBIMBING PRAKERIN</span>
             </li>
             <!-- =================== -->
-            <!-- PEMBIMBING MAGANG -->
+            <!-- PEMBIMBING PRAKERIN -->
             <!-- =================== -->
             <li class="sidebar-item">
               <a class="sidebar-link" href="index-2.html" aria-expanded="false">
@@ -213,7 +213,7 @@
                           <h5 class="mb-1 fs-3">SMKN 1 PROBOLINGGO</h5>
                           <span class="mb-1 d-block text-dark">Admin</span>
                           <p class="mb-0 d-flex text-dark align-items-center gap-2">
-                            <i class="ti ti-mail fs-4"></i> smexamagang@gmail.com
+                            <i class="ti ti-mail fs-4"></i> smexaPRAKERIN@gmail.com
                           </p>
                         </div>
                       </div>
