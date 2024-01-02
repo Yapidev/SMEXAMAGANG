@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswas', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('image');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->string('nik');
             $table->enum('kelas', ['XII', 'XI', 'X']);
-            $table->enum('jurusan', ['Rekayasa Perangkat Lunak', 'Akuntansi', 'Manajemen Perkantoran', 'Layanan Perbankan', 'Bisnis Digital']);
-            $table->string('image');
-            $table->foreignId('prakerins_id')->constrained('prakerins');
+            $table->enum('jurusan', ['RPL', 'AK', 'MP', 'LP', 'BD']);
             $table->timestamps();
         });
     }

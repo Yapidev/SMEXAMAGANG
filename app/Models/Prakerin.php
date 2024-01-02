@@ -2,18 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\UUIDAsPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Prakerin extends Model
 {
-    use HasFactory;
+    use HasFactory, UUIDAsPrimaryKey;
 
     protected $table = 'prakerins';
 
     protected $fillable = ['name', 'description', 'address', 'image'];
 
-    protected $guarder = ['id'];
+    protected $guarded = ['id'];
 
     public function siswa() {
         return $this->hasMany('siswas');
