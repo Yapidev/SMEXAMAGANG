@@ -19,19 +19,20 @@
 
   {{-- CSS --}}
   <link id="themeColors" rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
+
+  {{-- CSS LAYOUTS --}}
+  <link rel="stylesheet" href="{{ asset('assets/css/main/app-layouts.css') }}">
 </head>
 
 <body>
 
   <!-- Preloader -->
   <div class="preloader">
-    <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/favicon.ico"
-      alt="loader" class="lds-ripple img-fluid" />
+    <img src="{{ asset('assets/sekolah/sekolah.png') }}" alt="loader" class="lds-ripple img-fluid" />
   </div>
   <!-- Preloader -->
   <div class="preloader">
-    <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/favicon.ico"
-      alt="loader" class="lds-ripple img-fluid" />
+    <img src="{{ asset('assets/sekolah/sekolah.png') }}" alt="loader" class="lds-ripple img-fluid" />
   </div>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
@@ -40,14 +41,10 @@
     <aside class="left-sidebar">
       <!-- Sidebar scroll-->
       <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="index-2.html" class="text-nowrap logo-img">
-            <img
-              src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg"
-              class="dark-logo" width="180" alt="" />
-            <img
-              src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/light-logo.svg"
-              class="light-logo" width="180" alt="" />
+        <div class="brand-logo d-flex align-items-center justify-content-center">
+          <a href="{{ route('home') }}" style="width: 100%; display: flex; justify-content: center; align-items: center" class="text-nowrap logo-img py-4">
+            <img style="width: 40%" src="{{ asset('assets/sekolah/sekolah.png') }}" class="dark-logo" width="180" alt="" />
+            <img style="width: 40%" src="{{ asset('assets/sekolah/sekolah.png') }}" class="light-logo" width="180" alt="" />
           </a>
           <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8 text-muted"></i>
@@ -57,81 +54,96 @@
         <nav class="sidebar-nav scroll-sidebar" data-simplebar>
           <ul id="sidebarnav">
             <!-- ============================= -->
-            <!-- Home -->
+            <!-- DASHBOARD -->
+            <!-- ============================= -->
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{ route('home') }}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-home"></i>
+                </span>
+                <span class="hide-menu">Dashboard</span>
+              </a>
+            </li>
+            <!-- ============================= -->
+            <!-- TEMPAT MAGANG -->
             <!-- ============================= -->
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Home</span>
+              <span class="hide-menu">TEMPAT MAGANG</span>
             </li>
             <!-- =================== -->
-            <!-- Dashboard -->
+            <!-- TEMPAT MAGANG -->
             <!-- =================== -->
             <li class="sidebar-item">
               <a class="sidebar-link" href="index-2.html" aria-expanded="false">
                 <span>
-                  <i class="ti ti-aperture"></i>
+                  <i class="ti ti-building-skyscraper"></i>
                 </span>
-                <span class="hide-menu">Modern</span>
+                <span class="hide-menu">List Tempat Magang</span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="index2.html" aria-expanded="false">
                 <span>
-                  <i class="ti ti-shopping-cart"></i>
+                  <i class="ti ti-map-pin"></i>
                 </span>
-                <span class="hide-menu">eCommerce</span>
+                <span class="hide-menu">Tambah Tempat Magang</span>
+              </a>
+            </li>
+            <!-- ============================= -->
+            <!-- SISWA MAGANG -->
+            <!-- ============================= -->
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">SISWA MAGANG</span>
+            </li>
+            <!-- =================== -->
+            <!-- SISWA MAGANG -->
+            <!-- =================== -->
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="index-2.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                <span class="hide-menu">List Siswa</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index3.html" aria-expanded="false">
+              <a class="sidebar-link" href="index2.html" aria-expanded="false">
                 <span>
-                  <i class="ti ti-currency-dollar"></i>
+                  <i class="ti ti-user-plus"></i>
                 </span>
-                <span class="hide-menu">NFT</span>
+                <span class="hide-menu">Tambah Siswa</span>
+              </a>
+            </li>
+            <!-- ============================= -->
+            <!-- PEMBIMBING MAGANG -->
+            <!-- ============================= -->
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu">PEMBIMBING MAGANG</span>
+            </li>
+            <!-- =================== -->
+            <!-- PEMBIMBING MAGANG -->
+            <!-- =================== -->
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="index-2.html" aria-expanded="false">
+                <span>
+                  <i class="ti ti-users"></i>
+                </span>
+                <span class="hide-menu">List Pembimbing</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="index4.html" aria-expanded="false">
+              <a class="sidebar-link" href="index2.html" aria-expanded="false">
                 <span>
-                  <i class="ti ti-cpu"></i>
+                  <i class="ti ti-user-plus"></i>
                 </span>
-                <span class="hide-menu">Crypto</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="index5.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-activity-heartbeat"></i>
-                </span>
-                <span class="hide-menu">General</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="index6.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-playlist"></i>
-                </span>
-                <span class="hide-menu">Music</span>
+                <span class="hide-menu">Tambah Pembimbing</span>
               </a>
             </li>
           </ul>
         </nav>
-        <div class="fixed-profile p-3 bg-light-secondary rounded sidebar-ad mt-3">
-          <div class="hstack gap-3">
-            <div class="john-img">
-              <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle" width="40"
-                height="40" alt="">
-            </div>
-            <div class="john-title">
-              <h6 class="mb-0 fs-4 fw-semibold">Mathew</h6>
-              <span class="fs-2 text-dark">Designer</span>
-            </div>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="border-0 bg-transparent text-primary ms-auto"></a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-          </div>
-        </div>
         <!-- End Sidebar navigation -->
       </div>
       <!-- End Sidebar scroll-->
@@ -144,8 +156,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link sidebartoggler nav-icon-hover ms-n3" id="headerCollapse"
-                href="javascript:void(0)">
+              <a class="nav-link sidebartoggler nav-icon-hover ms-n3" id="headerCollapse" href="javascript:void(0)">
                 <i class="ti ti-menu-2"></i>
               </a>
             </li>
@@ -158,11 +169,11 @@
           </ul>
           <div class="d-block d-lg-none">
             <img
-              src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/dark-logo.svg"
-              class="dark-logo" width="180" alt="" />
+              src="{{ asset('assets/sekolah/sekolah.png') }}"
+              class="dark-logo" width="50" alt="" />
             <img
-              src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/logos/light-logo.svg"
-              class="light-logo" width="180" alt="" />
+              src="{{ asset('assets/sekolah/sekolah.png') }}"
+              class="light-logo" width="50" alt="" />
           </div>
           <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -173,9 +184,8 @@
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
-              <a href="javascript:void(0)"
-                class="nav-link d-flex d-lg-none align-items-center justify-content-center" type="button"
-                data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
+              <a href="javascript:void(0)" class="nav-link d-flex d-lg-none align-items-center justify-content-center"
+                type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
                 aria-controls="offcanvasWithBothOptions">
                 <i class="ti ti-align-justified fs-7"></i>
               </a>
@@ -185,8 +195,8 @@
                     aria-expanded="false">
                     <div class="d-flex align-items-center">
                       <div class="user-profile-img">
-                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle" width="35"
-                          height="35" alt="" />
+                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle"
+                          width="35" height="35" alt="" />
                       </div>
                     </div>
                   </a>
@@ -197,8 +207,8 @@
                         <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                       </div>
                       <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle" width="80"
-                          height="80" alt="" />
+                        <img src="{{ asset('assets/images/profile/user-1.jpg') }}" class="rounded-circle"
+                          width="80" height="80" alt="" />
                         <div class="ms-3">
                           <h5 class="mb-1 fs-3">SMKN 1 PROBOLINGGO</h5>
                           <span class="mb-1 d-block text-dark">Admin</span>
@@ -243,9 +253,12 @@
                         </a>
                       </div>
                       <div class="d-grid py-4 px-7 pt-8">
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-primary">Log Out</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
+                        <a href="{{ route('logout') }}"
+                          onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                          class="btn btn-outline-primary">Log Out</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                          style="display: none;">
+                          {{ csrf_field() }}
                         </form>
                       </div>
                     </div>
@@ -261,7 +274,7 @@
         @yield('content')
       </div>
     </div>
-  </div>    
+  </div>
 
   <!--  Mobilenavbar -->
   <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="mobilenavbar"
