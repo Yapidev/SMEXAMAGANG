@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|unique:pembimbings,name',
+            'image' => 'required|image|mimes=jpg,jpeg,png|max:2000',
+            'gender' => 'required|in:laki-laki,perempuan',
+            'jurusan' => 'required',
+            'prakerins_id' => 'required'
         ];
     }
 }

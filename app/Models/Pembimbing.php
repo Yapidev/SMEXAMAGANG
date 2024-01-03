@@ -12,7 +12,7 @@ class Pembimbing extends Model
 
     protected $table = 'pembimbings';
 
-    protected $fillable = ['name', 'image', 'jabatan', 'jurusan', 'prakerins_id'];
+    protected $fillable = ['name', 'image', 'jabatan', 'jurusan', 'prakerins_id', 'gender'];
 
     protected $guarded = ['id'];
 

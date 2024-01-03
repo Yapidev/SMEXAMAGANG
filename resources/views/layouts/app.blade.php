@@ -112,15 +112,7 @@
                                 <span>
                                     <i class="ti ti-users"></i>
                                 </span>
-                                <span class="hide-menu">List Siswa</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="index2.html" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-user-plus"></i>
-                                </span>
-                                <span class="hide-menu">Tambah Siswa</span>
+                                <span class="hide-menu">Siswa</span>
                             </a>
                         </li>
                         <!-- ============================= -->
@@ -134,19 +126,11 @@
                         <!-- PEMBIMBING PRAKERIN -->
                         <!-- =================== -->
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="index-2.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('pembimbing.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-users"></i>
                                 </span>
-                                <span class="hide-menu">List Pembimbing</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="index2.html" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-user-plus"></i>
-                                </span>
-                                <span class="hide-menu">Tambah Pembimbing</span>
+                                <span class="hide-menu">Guru Pembimbing</span>
                             </a>
                         </li>
                     </ul>
@@ -222,52 +206,16 @@
                                                     <h5 class="mb-1 fs-3">SMKN 1 PROBOLINGGO</h5>
                                                     <span class="mb-1 d-block text-dark">Admin</span>
                                                     <p class="mb-0 d-flex text-dark align-items-center gap-2">
-                                                        <i class="ti ti-mail fs-4"></i> smexaPRAKERIN@gmail.com
+                                                        <i class="ti ti-mail fs-4"></i> smexaprakerin@gmail.com
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="message-body">
-                                                <a href="page-user-profile.html"
-                                                    class="py-8 px-7 mt-8 d-flex align-items-center">
-                                                    <span
-                                                        class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                                        <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg"
-                                                            alt="" width="24" height="24">
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold"> My Profile </h6>
-                                                        <span class="d-block text-dark">Account Settings</span>
-                                                    </div>
-                                                </a>
-                                                <a href="app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                                    <span
-                                                        class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                                        <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-inbox.svg"
-                                                            alt="" width="24" height="24">
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold">My Inbox</h6>
-                                                        <span class="d-block text-dark">Messages & Emails</span>
-                                                    </div>
-                                                </a>
-                                                <a href="app-notes.html" class="py-8 px-7 d-flex align-items-center">
-                                                    <span
-                                                        class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                                        <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-tasks.svg"
-                                                            alt="" width="24" height="24">
-                                                    </span>
-                                                    <div class="w-75 d-inline-block v-middle ps-3">
-                                                        <h6 class="mb-1 bg-hover-primary fw-semibold">My Task</h6>
-                                                        <span class="d-block text-dark">To-do and Daily Tasks</span>
-                                                    </div>
-                                                </a>
+                                                
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
-                                                <a href="{{ route('logout') }}"
-                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                                    class="btn btn-outline-primary">Log Out</a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                    style="display: none;">
+                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-danger">Log Out</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     {{ csrf_field() }}
                                                 </form>
                                             </div>

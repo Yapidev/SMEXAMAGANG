@@ -17385,7 +17385,7 @@
     --bs-body-bg-rgb: 33, 37, 41;
     --bs-emphasis-color: #fff;
     --bs-emphasis-color-rgb: 255, 255, 255;
-    --bs-secondary-color: rgba(90, 106, 133, 0.75);
+    --bs-secondary-color: rgba(133, 90, 90, 0.75);
     --bs-secondary-color-rgb: 90, 106, 133;
     --bs-secondary-bg: #343a40;
     --bs-secondary-bg-rgb: 52, 58, 64;
@@ -21419,8 +21419,8 @@ fieldset:disabled .btn {
     --bs-nav-link-padding-y: 0.5rem;
     --bs-nav-link-font-size: 1rem;
     --bs-nav-link-font-weight: 400;
-    --bs-nav-link-color: #2a3547;
-    --bs-nav-link-hover-color: #2a3547;
+    --bs-nav-link-color: #472A2A;
+    --bs-nav-link-hover-color: #472A2A;
     --bs-nav-link-disabled-color: var(--bs-secondary-color);
     display: flex;
     flex-wrap: wrap;
@@ -21562,8 +21562,8 @@ fieldset:disabled .btn {
 .navbar {
     --bs-navbar-padding-x: 0;
     --bs-navbar-padding-y: 0.5rem;
-    --bs-navbar-color: #2a3547;
-    --bs-navbar-hover-color: #5d87ff;
+    --bs-navbar-color: #472A2A;
+    --bs-navbar-hover-color: #FF5D5D;
     --bs-navbar-disabled-color: rgba(var(--bs-emphasis-color-rgb), 0.3);
     --bs-navbar-active-color: rgba(var(--bs-emphasis-color-rgb), 1);
     --bs-navbar-brand-padding-y: 0.3359375rem;
