@@ -32,8 +32,11 @@ Route::middleware('auth')->group(function () {
 
     // Route Controller Siswa
     Route::controller(SiswaController::class)->group(function () {
-        Route::get('list-siswa', 'listSiswa')->name('list-siswa');
-        // Route::get('create-siswa', 'createSiswa')->name('create-siswa');
+        Route::get('list-siswa', 'index')->name('siswa.index');
+        Route::post('create-siswa', 'create')->name('siswa.create');
+        Route::get('edit-siswa/{siswa}', 'edit')->name('siswa.edit');
+        Route::put('update-siswa/{siswa}', 'update')->name('siswa.update');
+        Route::delete('destroy-siswa/{siswa}', 'destroy')->name('siswa.destroy');
     });
 
     Route::controller(PembimbingController::class)->group(function () {

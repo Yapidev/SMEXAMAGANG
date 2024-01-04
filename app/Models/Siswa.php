@@ -12,9 +12,9 @@ class Siswa extends Model
 
     protected $table = 'siswas';
 
-    protected $fillable = [
-        'name', 'image', 'phone_number', 'nik', 'kelas', 'jurusan', 'image', 'prakerins_id'
-    ];
+    // protected $fillable = [
+    //     'name', 'image', 'phone_number', 'nik', 'kelas', 'jurusan', 'image', 'prakerins_id'
+    // ];
 
     protected $guarded = ['id'];
 

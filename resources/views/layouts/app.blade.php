@@ -23,8 +23,16 @@
     {{-- CSS LAYOUTS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/main/app-layouts.css') }}">
 
+    {{-- Toast CSS --}}
+    <style>
+        #toast-container {
+            top: 15px;
+        }
+    </style>
+
     {{-- YIELD LINK --}}
     @yield('link')
+
 </head>
 
 <body>
@@ -108,7 +116,7 @@
                         <!-- SISWA PRAKERIN -->
                         <!-- =================== -->
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('list-siswa') }}" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('siswa.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-users"></i>
                                 </span>
@@ -211,11 +219,14 @@
                                                 </div>
                                             </div>
                                             <div class="message-body">
-                                                
+
                                             </div>
                                             <div class="d-grid py-4 px-7 pt-8">
-                                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-danger">Log Out</a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                <a href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                                    class="btn btn-outline-danger">Log Out</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    style="display: none;">
                                                     {{ csrf_field() }}
                                                 </form>
                                             </div>
@@ -521,6 +532,17 @@
     <script src="{{ asset('assets/libs/owl.carousel/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+
+    {{-- Toast Script --}}
+    <script src="{{ asset('assets/js/plugins/toastr-init.js') }}"></script>
+    <script>
+        toastr.options = {
+            "positionClass": "toast-top-center",
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 3000,
+        };
+    </script>
 
     {{-- YIELD SCRIPT --}}
     @yield('script')

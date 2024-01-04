@@ -12,7 +12,7 @@ class Prakerin extends Model
 
     protected $table = 'prakerins';
 
-    protected $fillable = ['name', 'description', 'address', 'image'];
+    // protected $fillable = ['name', 'description', 'address', 'image'];
 
     protected $guarded = ['id'];
 
