@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(TempatPrakerinController::class)->group(function () {
         Route::get('tempatPrakerin', 'index')->name('tempatPrakerin.index');
         Route::post('tempatPrakerin/store', 'store')->name('tempatPrakerin.store');
-        Route::put('tempatPrakerin/{id}', 'update')->name('tempatPrakerin.update');
+        Route::put('tempatPrakerin/update/{id}', 'update')->name('tempatPrakerin.update');
         Route::delete('tempatPrakerin/{id}', 'destroy')->name('tempatPrakerin.destroy');
     });
 });

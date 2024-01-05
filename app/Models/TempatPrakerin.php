@@ -10,8 +10,7 @@ class TempatPrakerin extends Model
 {
     use HasFactory, UUIDAsPrimaryKey;
 
-protected $table = 'tempat_prakerins';
+    protected $table = 'tempat_prakerins';
 
     protected $guarded = ['id'];
-
 }
