@@ -22,11 +22,10 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:pembimbings,name',
+            'name' => 'required',
             'image' => 'required|image|mimes=jpg,jpeg,png|max:2000',
             'gender' => 'required|in:laki-laki,perempuan',
             'jurusan' => 'required',
-            'prakerins_id' => 'required'
         ];
     }
 }

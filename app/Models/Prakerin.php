@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UUIDAsPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Prakerin extends Model
 {
@@ -12,15 +13,35 @@ class Prakerin extends Model
 
     protected $table = 'prakerins';
 
-    // protected $fillable = ['name', 'description', 'address', 'image'];
-
     protected $guarded = ['id'];
 
-    public function siswa() {
-        return $this->hasMany('siswas');
+    /**
+     * siswa
+     *
+     * @return BelongsTo
+     */
+    public function siswa(): BelongsTo
+    {
+        return $this->belongsTo(Siswa::class);
     }
 
-    public function pembimbing() {
-        return $this->hasMany('pembimbing');
+    /**
+     * pembimbing
+     *
+     * @return BelongsTo
+     */
+    public function pembimbing(): BelongsTo
+    {
+        return $this->belongsTo(Pembimbing::class);
+    }
+
+    /**
+     * tempat_prakerin
+     *
+     * @return BelongsTo
+     */
+    public function tempat_prakerin(): BelongsTo
+    {
+        return $this->belongsTo(TempatPrakerin::class);
     }
 }

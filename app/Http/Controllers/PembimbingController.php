@@ -13,79 +13,118 @@ use Illuminate\Support\Str;
 
 class PembimbingController extends Controller
 {
+    /**
+     * index function untuk menampilkan halaman dan data pembimbing
+     *
+     * @return void
+     */
     public function index()
     {
-        $data = Pembimbing::all();
-        $lokasi = TempatPrakerin::all();
+        $dataPembimbing = Pembimbing::query()
+            ->latest()
+            ->get();
 
-        return view('pembimbing.index', compact('data', 'lokasi'));
+        return view('pembimbing.index', compact('dataPembimbing'));
     }
 
-    public function store(StoreRequest $request)
+    /**
+     * create function untuk store atau post data pembimbing baru ke table pembimbings
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function create(StoreRequest $request)
     {
         try {
-            $validatedData = $request->validated();
-
             if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $path = 'uploads/pembimbing/';
-
-                Storage::makeDirectory($path);
-
-                $imageName = Str::uuid()->toString() . '.' . $image->getClientOriginalExtension();
-
-                $image->storeAs($path, $imageName);
-
-                $validatedData['image_path'] = $path . $imageName;
+                $nameImage = $request->image->store('foto-pembimbing', 'public');
+            } else {
+                $nameImage = null;
             }
 
-            Pembimbing::create($validatedData);
+            $data = [
+                'name' => ucwords($request->name),
+                'gender' => $request->gender,
+                'jurusan' => $request->jurusan,
+                'tempat_prakerin_id' => $request->tempat,
+            ];
 
-            return redirect()->route('pembimbing.index')->with('success', 'Berhasil Menambah Data')->withStatus(201);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal Menambah Data. ' . $e->getMessage())->withStatus(400);
+            Pembimbing::create($data);
+
+            $dataPembimbing = Pembimbing::query()
+                ->latest()
+                ->get();
+
+            return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $dataPembimbing], 200);
+        } catch (\Throwable $e) {
+            dd($e);
+            return response()->json(['message' => 'Terjadi kesalahan saat membuat siswa' . $e->getMessage()], 500);
         }
     }
 
-    public function update(UpdateRequest $request, Pembimbing $id)
+    /**
+     * edit function untuk get data instance model pembimbing terkait
+     *
+     * @param  mixed $pembimbing
+     * @return void
+     */
+    public function edit(Pembimbing $pembimbing)
+    {
+        return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $pembimbing], 200);
+    }
+
+    /**
+     * update function untuk update atau put data pembimbing terkait
+     *
+     * @param  mixed $request
+     * @param  mixed $pembimbing
+     * @return void
+     */
+    public function update(UpdateRequest $request, Pembimbing $pembimbing)
     {
         try {
-            $validatedData = $request->validated();
-
             if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $path = 'uploads/pembimbing/';
-                Storage::makeDirectory($path);
-                $imageName = Str::uuid()->toString() . '.' . $image->getClientOriginalExtension();
-                if ($id->image_path) {
-                    Storage::delete($id->image_path);
+                if ($pembimbing->image != null) {
+                    Storage::disk('public')->delete($pembimbing->image);
                 }
-                $image->storeAs($path, $imageName);
-                $validatedData['image_path'] = $path . $imageName;
+                $nameImage = $request->image->store('foto-pembimbing', 'public');
+            } else {
+                $nameImage = $pembimbing->image;
             }
 
-            $id->update($validatedData);
+            $data = [
+                'name' => ucwords($request->name),
+                'gender' => $request->gender,
+                'jurusan' => $request->jurusan,
+                'tempat_prakerin_id' => $request->tempat,
+                'image' => $nameImage,
+            ];
 
-            return redirect()->route('pembimbing.index')->with('success', 'Berhasil Mengedit Data')->withStatus(200);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal Mengedit Data. ' . $e->getMessage())->withStatus(400);
+            $pembimbing->update($data);
+
+            $dataPembimbing = Pembimbing::query()
+                ->latest()
+                ->get();
+
+            return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $dataPembimbing], 200);
+        } catch (\Throwable $e) {
+            dd($e);
+            return response()->json(['message' => 'Terjadi kesalahan saat mengupdate dataPembimbing' . $e->getMessage()], 500);
         }
     }
 
-    public function destroy($id)
+    public function destroy(Pembimbing $pembimbing)
     {
-        try {
-            $pembimbing = Pembimbing::findOrFail($id);
+        $pembimbing->delete();
 
-            if ($pembimbing->image_path) {
-                Storage::delete($pembimbing->image_path);
-            }
+        $dataPembimbing = Pembimbing::query()
+            ->latest()
+            ->get();
 
-            $pembimbing->delete();
-
-            return redirect()->route('pembimbing.index')->with('success', 'Berhasil Menghapus Data')->withStatus(200);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal Menghapus Data. ' . $e->getMessage())->withStatus(400);
+        if ($dataPembimbing->isEmpty()) {
+            return response()->json(['success' => 'Berhasil', 'dataPembimbing' => null], 200);
         }
+
+        return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $dataPembimbing], 200);
     }
 }

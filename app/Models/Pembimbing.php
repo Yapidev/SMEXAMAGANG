@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UUIDAsPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pembimbing extends Model
 {
@@ -14,7 +15,13 @@ class Pembimbing extends Model
 
     protected $guarded = ['id'];
 
-    public function prakerins() {
-        return $this->belongsTo('prakerins');
+    /**
+     * prakerins
+     *
+     * @return HasOne
+     */
+    public function prakerins(): HasOne
+    {
+        return $this->hasOne(Prakerin::class);
     }
 }
