@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('siswas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('class');
-            $table->string('phone_number');
-            $table->string('nik');
-            $table->enum('gender', ['L', 'P']);
+            $table->string('name')->nullable();
+            $table->string('class')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('nik')->nullable();
+            $table->enum('gender', ['L', 'P'])->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

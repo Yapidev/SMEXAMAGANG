@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\UUIDAsPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Siswa extends Model
 {
@@ -12,13 +13,15 @@ class Siswa extends Model
 
     protected $table = 'siswas';
 
-    // protected $fillable = [
-    //     'name', 'image', 'phone_number', 'nik', 'kelas', 'jurusan', 'image', 'prakerins_id'
-    // ];
-
     protected $guarded = ['id'];
 
-    public function prakerin() {
-        return $this->belongsTo('prakerins');
+    /**
+     * prakerin
+     *
+     * @return HasMany
+     */
+    public function prakerin(): HasMany
+    {
+        return $this->hasMany(Prakerin::class);
     }
 }

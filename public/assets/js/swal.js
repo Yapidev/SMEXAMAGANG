@@ -13,6 +13,8 @@ function showErrorPopup(title, text) {
         icon: "error",
         title: title,
         text: text,
+        showConfirmButton: false,
+        timer: 3000,
     });
 }
 
@@ -21,5 +23,7 @@ function showWarningPopup(title, text) {
         icon: "warning",
         title: title,
         text: text,
+        showConfirmButton: false,
+        timer: 3000,
     });
 }

@@ -37,17 +37,22 @@ Route::middleware('auth')->group(function () {
         Route::get('edit-siswa/{siswa}', 'edit')->name('siswa.edit');
         Route::put('update-siswa/{siswa}', 'update')->name('siswa.update');
         Route::delete('destroy-siswa/{siswa}', 'destroy')->name('siswa.destroy');
+        Route::post('import-siswa-csv', 'importCsv')->name('siswa.import');
     });
 
+    // Route Controller Pembimbing
     Route::controller(PembimbingController::class)->group(function () {
         Route::get('list-pembimbing', 'index')->name('pembimbing.index');
         Route::post('list-pembimbing', 'store')->name('pembimbing.store');
         Route::put('list-pembimbing/{id}', 'update')->name('pembimbing.update');
         Route::delete('list-pembimbing/{id}', 'destroy')->name('pembimbing.destroy');
     });
-    Route::controller(PrakerinController::class)->group(function () {
 
+    // Route Controller Prakerin
+    Route::controller(PrakerinController::class)->group(function () {
     });
+
+    // Route Controller Tempat Prakerin
     Route::controller(TempatPrakerinController::class)->group(function () {
         Route::get('tempatPrakerin', 'index')->name('tempatPrakerin.index');
         Route::post('tempatPrakerin/store', 'store')->name('tempatPrakerin.store');

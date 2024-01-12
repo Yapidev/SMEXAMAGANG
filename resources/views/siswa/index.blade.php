@@ -27,11 +27,14 @@
                             <h5 class="mb-0">Tabel List Data Siswa</h5>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-2">
                                 <button class="btn btn-primary me-md-2 mb-2 mb-md-0" data-bs-target="#create-siswa-modal"
-                                    data-bs-toggle="modal">Tambah Siswa</button>
-                                <button class="btn btn-success me-md-2 mb-2 mb-md-0">Import Excel</button>
-                                <button class="btn btn-success me-md-2 mb-2 mb-md-0">Export Excel</button>
-                                <button class="btn btn-danger me-md-2 mb-2 mb-md-0">Export PDF</button>
-                                <button class="btn btn-info me-md-2 mb-2 mb-md-0">Export Word</button>
+                                    data-bs-toggle="modal"><i class="ti me-1 ti-user-plus"></i> Tambah Siswa</button>
+                                <button type="button" class="btn btn-success me-md-2 mb-2 mb-md-0" id="btn-import"><i
+                                        class="ti me-1 ti-file-spreadsheet"></i> Import CSV</button>
+                                <form id="import-form" action="{{ route('siswa.import') }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="import" id="import-input" accept="text/csv" class="d-none">
+                                </form>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -329,6 +332,7 @@
     {{-- Import Script Datatable --}}
     <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/swal.js') }}"></script>
+    <script src="{{ asset('assets/js/loader.js') }}"></script>
 
     {{-- Import Script Swal --}}
     <script src="{{ asset('assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
@@ -471,6 +475,8 @@
             $('#create-siswa-form').on('submit', function(event) {
                 event.preventDefault();
 
+                showLoader();
+
                 var form = this;
                 var formData = new FormData(form);
 
@@ -512,6 +518,8 @@
                             modal.find('#create-image-preview').attr('src',
                                 'https://via.placeholder.com/200');
 
+                            hideLoader();
+
                             // Swal Success
                             showSuccessPopup('Berhasil', 'Berhasil menambah data');
                         }
@@ -547,6 +555,8 @@
                                     select.next('.invalid-feedback').text(errors[
                                         fieldName][0]);
                                 });
+
+                                hideLoader();
                             };
                         } else {
                             // Swal Error
@@ -630,6 +640,8 @@
             $('#edit-siswa-form').on('submit', function(event) {
                 event.preventDefault();
 
+                showLoader();
+
                 var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
                 var form = this;
@@ -678,6 +690,8 @@
                             modal.find('#edit-image-preview').attr('src',
                                 'https://via.placeholder.com/200');
 
+                            hideLoader();
+
                             // Swal Success
                             showSuccessPopup('Berhasil', 'Berhasil mengedit data');
                         };
@@ -713,6 +727,8 @@
                                     select.next('.invalid-feedback').text(errors[
                                         fieldName][0]);
                                 });
+
+                                hideLoader();
                             };
                         } else {
                             // Swal Error
@@ -744,6 +760,7 @@
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    showLoader();
 
                     $.ajax({
                         type: 'DELETE',
@@ -753,9 +770,6 @@
                         contentType: false,
                         success: function(response) {
                             if (response.success) {
-                                // Swal Success
-                                showSuccessPopup('Berhasil', 'Berhasil menghapus data');
-
                                 // Remove Datatable
                                 var table = $('#list-siswa').DataTable().destroy();
 
@@ -764,11 +778,15 @@
 
                                 // Inisialisasi Ulang Datatable
                                 initDataTable();
+
+                                hideLoader();
+                                // Swal Success
+                                showSuccessPopup('Berhasil', 'Berhasil menghapus data');
                             }
                         },
                         error: function(error) {
                             // Swal Error
-                            showErrorPopup('Gagal!', 'Gagal menghapus data, silahkan coba lagi')
+                            showErrorPopup('Gagal', 'Gagal menghapus data, silahkan coba lagi')
                         },
                     });
                 };
@@ -776,4 +794,43 @@
         });
     </script>
     {{-- Script For Delete Siswa --}}
+
+    {{-- Script for Import Siswa --}}
+    <script>
+        $('#btn-import').on('click', function() {
+            $('#import-input').click();
+        });
+        $('#import-input').on('change', function() {
+            showLoader();
+
+            let form = $('#import-form');
+            let formData = new FormData(form[0]);
+
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        // Handle Success Response
+                        handleSuccessResponse(response);
+
+                        // Inisialisasi Ulang Datatable
+                        initDataTable();
+
+                        hideLoader();
+                        showSuccessPopup('Berhasil', 'Berhasil mengimport siswa');
+                    }
+                },
+                error: function(error) {
+                    $('#import-input').val('');
+                    hideLoader();
+                    showErrorPopup('Gagal', 'Gagal mengimport siswa');
+                }
+            })
+        });
+    </script>
+    {{-- Script for Import Siswa --}}
 @endsection
