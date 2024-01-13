@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembimbing;
+use App\Models\Prakerin;
+use App\Models\Siswa;
+use App\Models\TempatPrakerin;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +27,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $siswaQuery = Siswa::query();
+        $pembimbingQuery = Pembimbing::query();
+        $tempatPrakerinQuery = TempatPrakerin::query();
+        $prakerinQuery = Prakerin::query();
+
+        $carouselData = [
+            'siswa' => $siswaQuery->count(),
+            'pembimbing' => $pembimbingQuery->count(),
+            'tempat_prakerin' => $tempatPrakerinQuery->count(),
+            'prakerin' => $prakerinQuery->whereNot('status', 'diberhentikan')->count(),
+        ];
+
+        return view('home', compact('carouselData'));
     }
 }

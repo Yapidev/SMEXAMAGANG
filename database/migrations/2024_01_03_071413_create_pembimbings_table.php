@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('tempat_prakerins_id');
 
-            $table->foreign('tempat_prakerins_id')->references('id')->on('tempat_prakerins_id');
+            $table->foreign('tempat_prakerins_id')->references('id')->on('tempat_prakerins');
 
             $table->string('name');
             $table->string('image')->nullable();

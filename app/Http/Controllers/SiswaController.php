@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\SiswaExport;
 use App\Http\Requests\CreateSiswaRequest;
-use App\Http\Requests\Siswa\StoreRequest;
-use App\Http\Requests\Siswa\UpdateRequest;
 use App\Http\Requests\UpdateSiswaRequest;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {

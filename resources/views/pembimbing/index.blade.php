@@ -24,17 +24,10 @@
                 <div class="card">
                     <div class="card-body px-4 py-3">
                         <div class="mb-2">
-                            <h5 class="mb-0">Tabel List Data Siswa</h5>
+                            <h5 class="mb-0">Tabel List Data Pembimbing</h5>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-2">
                                 <button class="btn btn-primary me-md-2 mb-2 mb-md-0" data-bs-target="#create-siswa-modal"
-                                    data-bs-toggle="modal"><i class="ti me-1 ti-user-plus"></i> Tambah Siswa</button>
-                                <button type="button" class="btn btn-success me-md-2 mb-2 mb-md-0" id="btn-import"><i
-                                        class="ti me-1 ti-file-spreadsheet"></i> Import CSV</button>
-                                <form id="import-form" action="{{ route('siswa.import') }}" method="post"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="import" id="import-input" accept="text/csv" class="d-none">
-                                </form>
+                                    data-bs-toggle="modal"><i class="ti me-1 ti-user-plus"></i> Tambah Pembimbing </button>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -43,15 +36,13 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Nama</th>
-                                        <th>Kelas</th>
-                                        <th>Nomor Telpon</th>
-                                        <th>NIK</th>
+                                        <th>Jurusan</th>
                                         <th>Gender</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="data-siswa-container">
-                                    @forelse ($dataSiswa as $data)
+                                    @forelse ($dataPembimbing as $data)
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
                                             <td>
@@ -64,9 +55,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>{{ $data->class }}</td>
-                                            <td>{{ $data->phone_number }}</td>
-                                            <td>{{ $data->nik }}</td>
+                                            <td>{{ $data->jurusan }}</td>
                                             <td>{{ $data->gender }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-warning edit-btn"
@@ -96,11 +85,11 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tambah Siswa Baru</h5>
+                    <h5 class="modal-title">Tambah Pembimbing Baru</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('siswa.create') }}" class="ps-3 pr-3" method="POST" id="create-siswa-form"
+                    <form action="{{ route('pembimbing.store') }}" class="ps-3 pr-3" method="POST" id="create-siswa-form"
                         enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -113,59 +102,43 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="untuk" class="form-label">Kelas :</label>
-                                    <select name="class" class="form-control" id="">
-                                        <option value="" selected disabled>Pilih Kelas</option>
+                                    <label for="untuk" class="form-label">Jurusan :</label>
+                                    <select name="jurusan" class="form-control" id="">
+                                        <option value="" selected disabled>Pilih Jurusan</option>
                                         <!-- Kelas X -->
-                                        <option value="XRPL1">X RPL 1</option>
-                                        <option value="XRPL2">X RPL 2</option>
-                                        <option value="XMP1">X MP 1</option>
-                                        <option value="XMP2">X MP 2</option>
-                                        <option value="XBD1">X BD 1</option>
-                                        <option value="XBD2">X BD 2</option>
-                                        <option value="XAK1">X AK 1</option>
-                                        <option value="XAK2">X AK 2</option>
-                                        <option value="XLP1">X LP 1</option>
-                                        <option value="XLP2">X LP 2</option>
-
-                                        <!-- Kelas XI -->
-                                        <option value="XIRPL1">XI RPL 1</option>
-                                        <option value="XIRPL2">XI RPL 2</option>
-                                        <option value="XIMP1">XI MP 1</option>
-                                        <option value="XIMP2">XI MP 2</option>
-                                        <option value="XIBD1">XI BD 1</option>
-                                        <option value="XIBD2">XI BD 2</option>
-                                        <option value="XIAK1">XI AK 1</option>
-                                        <option value="XIAK2">XI AK 2</option>
-                                        <option value="XILP1">XI LP 1</option>
-                                        <option value="XILP2">XI LP 2</option>
-
-                                        <!-- Kelas XII -->
-                                        <option value="XIIRPL1">XII RPL 1</option>
-                                        <option value="XIIRPL2">XII RPL 2</option>
-                                        <option value="XIIMP1">XII MP 1</option>
-                                        <option value="XIIMP2">XII MP 2</option>
-                                        <option value="XIIBD1">XII BD 1</option>
-                                        <option value="XIIBD2">XII BD 2</option>
-                                        <option value="XIIAK1">XII AK 1</option>
-                                        <option value="XIIAK2">XII AK 2</option>
-                                        <option value="XIILP1">XII LP 1</option>
-                                        <option value="XIILP2">XII LP 2</option>
+                                        <option value="RPL">RPL</option>
+                                        <option value="AK">AK</option>
+                                        <option value="MP">MP</option>
+                                        <option value="LP">LP</option>
+                                        <option value="BD">BD</option>
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="untuk" class="form-label">Tempat Prakerin :</label>
+                                    <select name="tempat_pkl" class="form-control" id="">
+                                        <option value="" selected disabled>Pilih Tempat Prakerin</option>
+                                        <!-- Kelas X -->
+                                        <option value="RPL">RPL</option>
+                                        <option value="AK">AK</option>
+                                        <option value="MP">MP</option>
+                                        <option value="LP">LP</option>
+                                        <option value="BD">BD</option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                {{-- <div class="mb-3">
                                     <label for="" class="form-label">Nomor Telpon</label>
                                     <input type="number" name="phone_number" class="form-control"
                                         placeholder="Contoh : 085XXXXXXXXX">
                                     <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
+                                </div> --}}
+                                {{-- <div class="mb-3">
                                     <label for="" class="form-label">NIK</label>
                                     <input type="number" name="nik" class="form-control"
                                         placeholder="Contoh format NIK  [YYMMDD] [RRRR] [KK]">
                                     <div class="invalid-feedback"></div>
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <label class="form-label">Jenis Kelamin :</label>
                                     <div class="form-check">
@@ -176,8 +149,8 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender"
-                                            id="create-perempuan" value="P">
+                                        <input class="form-check-input" type="radio" name="gender" id="create-perempuan"
+                                            value="P">
                                         <label class="form-check-label cursor-pointer" for="create-perempuan">
                                             Perempuan
                                         </label>
@@ -187,8 +160,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="text-center mt-2 mb-4">
-                                    <img id="create-image-preview" src="https://via.placeholder.com/200"
-                                        alt="Preview Image" class="img-fluid mb-3 image-preview">
+                                    <img id="create-image-preview" src="https://via.placeholder.com/200" alt="Preview Image"
+                                        class="img-fluid mb-3 image-preview">
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFileLg" class="form-label">Masukkan foto siswa jika ada
@@ -399,9 +372,9 @@
             $('#data-siswa-container').empty();
 
             // Append Data
-            var dataSiswa = response.dataSiswa;
-            if (dataSiswa && dataSiswa.length > 0) {
-                $.each(dataSiswa, function(index, siswa) {
+            var dataPembimbing = response.dataPembimbing;
+            if (dataPembimbing && dataPembimbing.length > 0) {
+                $.each(dataPembimbing, function(index, siswa) {
                     var html = `
                             <tr>
                                 <td>${index + 1}.</td>
@@ -414,9 +387,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>${siswa.class}</td>
-                                <td>${siswa.phone_number}</td>
-                                <td>${siswa.nik}</td>
+                                <td>${siswa.jurusan}</td>
                                 <td>${siswa.gender}</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning edit-btn" data-url="{{ url('edit-siswa/${siswa.id}') }}">
@@ -595,7 +566,7 @@
                     success: function(response) {
                         if (response.success) {
 
-                            $.each(response.dataSiswa, function(fieldName, value) {
+                            $.each(response.dataPembimbing, function(fieldName, value) {
                                 var inputField = modal.find('[name="' + fieldName +
                                     '"]');
                                 if (inputField.length > 0 && inputField.attr('type') !==
@@ -612,10 +583,10 @@
                                 }
                             });
 
-                            if (response.dataSiswa.image != null) {
+                            if (response.dataPembimbing.image != null) {
                                 modal.find('#edit-image-preview').attr('src', 'storage/' +
                                     response
-                                    .dataSiswa
+                                    .dataPembimbing
                                     .image);
                             } else {
                                 modal.find('#edit-image-preview').attr('src',
@@ -623,7 +594,7 @@
                             }
 
                             var updateUrl = '{{ route('siswa.update', ['siswa' => 'id']) }}';
-                            updateUrl = updateUrl.replace('id', response.dataSiswa.id);
+                            updateUrl = updateUrl.replace('id', response.dataPembimbing.id);
 
                             modal.find('.btn-light-info').attr('data-url', updateUrl);
 

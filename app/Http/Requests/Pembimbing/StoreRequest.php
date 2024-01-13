@@ -23,9 +23,29 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => 'required|image|mimes=jpg,jpeg,png|max:2000',
+            'image' => 'nullable|image|mimes=jpg,jpeg,png|max:2000',
             'gender' => 'required|in:laki-laki,perempuan',
             'jurusan' => 'required',
+            'tempat_pkl' => 'required'
+        ];
+    }
+
+    /**
+     * messages
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama harus diisi.',
+            'image.image' => 'Gambar harus berupa file gambar.',
+            'image.mimes' => 'Gambar harus berformat JPG, JPEG, atau PNG.',
+            'image.max' => 'Ukuran gambar tidak boleh melebihi 2MB.',
+            'gender.required' => 'Jenis kelamin harus dipilih.',
+            'gender.in' => 'Jenis kelamin harus "laki-laki" atau "perempuan".',
+            'jurusan.required' => 'Jurusan harus diisi.',
+            'tempat_pkl' => 'Tempat Prakerin harus diisi.'
         ];
     }
 }

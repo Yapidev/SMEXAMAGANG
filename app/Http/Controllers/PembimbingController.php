@@ -33,7 +33,7 @@ class PembimbingController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function create(StoreRequest $request)
+    public function Store(StoreRequest $request)
     {
         try {
             if ($request->hasFile('image')) {
@@ -47,6 +47,7 @@ class PembimbingController extends Controller
                 'gender' => $request->gender,
                 'jurusan' => $request->jurusan,
                 'tempat_prakerin_id' => $request->tempat,
+                'image' => $nameImage,
             ];
 
             Pembimbing::create($data);
