@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('class')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('nik')->nullable();
+            $table->string('nisn')->nullable();
             $table->enum('gender', ['L', 'P'])->nullable();
             $table->string('image')->nullable();
+            $table->text('alamat');
             $table->timestamps();
         });
     }

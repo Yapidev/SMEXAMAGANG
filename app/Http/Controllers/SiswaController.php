@@ -8,6 +8,8 @@ use App\Models\Siswa;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class SiswaController extends Controller
 {
@@ -43,9 +45,10 @@ class SiswaController extends Controller
                 'name' => ucwords($request->name),
                 'class' => $request->class,
                 'phone_number' => $request->phone_number,
-                'nik' => $request->nik,
+                'nisn' => $request->nisn,
                 'gender' => $request->gender,
                 'image' => $nameImage,
+                'alamat' => $request->alamat
             ];
 
             Siswa::create($data);
@@ -56,7 +59,6 @@ class SiswaController extends Controller
 
             return response()->json(['success' => 'Berhasil', 'dataSiswa' => $dataSiswa], 200);
         } catch (\Throwable $e) {
-            dd($e);
             return response()->json(['message' => 'Terjadi kesalahan saat membuat siswa' . $e->getMessage()], 500);
         }
     }
@@ -96,9 +98,10 @@ class SiswaController extends Controller
                 'class' => $request->class,
                 'jurusan' => $request->jurusan,
                 'phone_number' => $request->phone_number,
-                'nik' => $request->nik,
+                'nisn' => $request->nisn,
                 'gender' => $request->gender,
                 'image' => $nameImage,
+                'alamat' => $request->alamat ?: $siswa->alamat
             ];
 
             $siswa->update($data);
@@ -145,31 +148,75 @@ class SiswaController extends Controller
     {
         DB::beginTransaction();
         try {
-            $path = $request->import->getRealPath();
+            $validator = Validator::make($request->all(), [
+                'import' => 'required|mimes:csv,txt',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->first()], 422);
+            }
+
+            $path = $request->file('import')->getRealPath();
             $data = array_map('str_getcsv', file($path));
             array_shift($data);
             $data = array_filter($data, function ($item) {
                 return !empty(trim(implode('', $item)));
             });
 
+            if ($data == null) {
+                return response()->json(['error', 'gagal'], 500);
+            };
+
+            $newData = [];
+
             foreach ($data as $row) {
-                Siswa::create([
-                    'name' => $row[0],
-                    'class' => $row[1],
-                    'phone_number' => $row[2],
-                    'nik' => $row[3],
-                    'gender' => $row[4],
-                ]);
+                foreach ($row as $item) {
+                    $rowData = explode(';', $item);
+
+                    $rowData[2] = str_pad($rowData[3], 12, '0', STR_PAD_LEFT);
+                    $rowData[3] = str_pad($rowData[2], 10, '0', STR_PAD_LEFT);
+
+                    $newData[] = [
+                        'name' => $rowData[0],
+                        'class' => $rowData[1],
+                        'phone_number' => $rowData[2],
+                        'nisn' => $rowData[3],
+                        'gender' => $rowData[4],
+                        'alamat' => $rowData[5]
+                    ];
+                }
             }
 
-            $siswa = Siswa::query()
-                ->latest()
-                ->get();
+            foreach ($newData as $rowData) {
+                $validator = Validator::make($rowData, [
+                    'name' => 'required|string|max:255',
+                    'class' => 'required|string|max:255',
+                    'phone_number' => 'required|string|max:20',
+                    'nisn' => [
+                        'required',
+                        'string',
+                        'max:20',
+                        Rule::unique('siswas', 'nisn'), // Pastikan nisn unik dalam tabel siswas
+                    ],
+                    'gender' => 'required',
+                    'alamat' => 'required|string|max:255',
+                ]);
+
+                if ($validator->fails()) {
+                    DB::rollBack();
+                    return response()->json(['error' => $validator->errors()->first()], 422);
+                }
+
+                Siswa::create($rowData);
+            }
+
+            DB::commit();
+            $siswa = Siswa::latest()->get();
 
             return response()->json(['success' => 'Berhasil import csv', 'dataSiswa' => $siswa]);
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json(['error' => 'Gagal import csv' . $th->getMessage()]);
+            return response()->json(['error' => 'Gagal import csv: ' . $th->getMessage()], 500);
         }
     }
 }

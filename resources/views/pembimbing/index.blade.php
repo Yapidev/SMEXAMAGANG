@@ -26,7 +26,7 @@
                         <div class="mb-2">
                             <h5 class="mb-0">Tabel List Data Pembimbing</h5>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-2">
-                                <button class="btn btn-primary me-md-2 mb-2 mb-md-0" data-bs-target="#create-siswa-modal"
+                                <button class="btn btn-danger me-md-2 mb-2 mb-md-0" data-bs-target="#create-siswa-modal"
                                     data-bs-toggle="modal"><i class="ti me-1 ti-user-plus"></i> Tambah Pembimbing </button>
                             </div>
                         </div>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->enum('gender', ['L', 'P']);
             $table->enum('jurusan', ['RPL', 'AK', 'MP', 'LP', 'BD']);
+            $table->text('alamat');
             $table->timestamps();
         });
     }

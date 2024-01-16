@@ -13,6 +13,14 @@
             object-fit: cover;
             /* Mengatur gambar untuk di-fit secara proporsional */
         }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
     </style>
 @endsection
 
@@ -26,7 +34,7 @@
                         <div class="mb-2">
                             <h5 class="mb-0">Tabel List Data Siswa</h5>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-2">
-                                <button class="btn btn-primary me-md-2 mb-2 mb-md-0" data-bs-target="#create-siswa-modal"
+                                <button class="btn btn-danger me-md-2 mb-2 mb-md-0" data-bs-target="#create-siswa-modal"
                                     data-bs-toggle="modal"><i class="ti me-1 ti-user-plus"></i> Tambah Siswa</button>
                                 <button type="button" class="btn btn-success me-md-2 mb-2 mb-md-0" id="btn-import"><i
                                         class="ti me-1 ti-file-spreadsheet"></i> Import CSV</button>
@@ -45,8 +53,9 @@
                                         <th>Nama</th>
                                         <th>Kelas</th>
                                         <th>Nomor Telpon</th>
-                                        <th>NIK</th>
+                                        <th>NISN</th>
                                         <th>Gender</th>
+                                        <th>Alamat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -66,8 +75,10 @@
                                             </td>
                                             <td>{{ $data->class }}</td>
                                             <td>{{ $data->phone_number }}</td>
-                                            <td>{{ $data->nik }}</td>
+                                            <td>{{ $data->nisn }}</td>
                                             <td>{{ $data->gender }}</td>
+                                            <td max-length="20" data-bs-toggle="tooltip" title="{{ $data->alamat }}">
+                                                {{ Str::limit($data->alamat, 20) }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-warning edit-btn"
                                                     data-url="{{ route('siswa.edit', ['siswa' => $data->id]) }}">
@@ -161,21 +172,21 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">NIK</label>
-                                    <input type="number" name="nik" class="form-control"
-                                        placeholder="Contoh format NIK  [YYMMDD] [RRRR] [KK]">
+                                    <label for="" class="form-label">NISN</label>
+                                    <input type="number" name="nisn" class="form-control"
+                                        placeholder="Contoh format NISN  [XXX] [YYYYYYY]">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Jenis Kelamin :</label>
-                                    <div class="form-check">
+                                    <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="create-laki"
                                             value="L">
                                         <label class="form-check-label cursor-pointer" for="create-laki">
                                             Laki-laki
                                         </label>
                                     </div>
-                                    <div class="form-check">
+                                    <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender"
                                             id="create-perempuan" value="P">
                                         <label class="form-check-label cursor-pointer" for="create-perempuan">
@@ -197,6 +208,11 @@
                                         accept="image/*" onchange="createPreviewImage(event)" />
                                     <div class="invalid-feedback"></div>
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label">Alamat :</label>
+                                <textarea class="form-control" name="alamat" id="" cols="30" rows="5"></textarea>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -278,27 +294,28 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">NIK</label>
-                                    <input type="number" name="nik" class="form-control"
-                                        placeholder="Contoh format NIK  [YYMMDD] [RRRR] [KK]">
+                                    <label for="" class="form-label">NISN</label>
+                                    <input type="number" name="nisn" class="form-control"
+                                        placeholder="Contoh format NISN  [XXX] [YYYYYYY]">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Jenis Kelamin :</label>
-                                    <div class="form-check">
+                                    <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="edit-laki"
                                             value="L">
                                         <label class="form-check-label cursor-pointer" for="edit-laki">
                                             Laki-laki
                                         </label>
                                     </div>
-                                    <div class="form-check">
+                                    <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender"
                                             id="edit-perempuan" value="P">
                                         <label class="form-check-label cursor-pointer" for="edit-perempuan">
                                             Perempuan
                                         </label>
                                     </div>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -313,6 +330,11 @@
                                         accept="image/*" onchange="editPreviewImage(event)" />
                                     <div class="invalid-feedback"></div>
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="alamat">Alamat</label>
+                                <textarea class="form-control" name="alamat" id="" cols="30" rows="5"></textarea>
+                                <div class="invalid-feedback"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -402,6 +424,10 @@
             var dataSiswa = response.dataSiswa;
             if (dataSiswa && dataSiswa.length > 0) {
                 $.each(dataSiswa, function(index, siswa) {
+                    var maxPanjang = 20;
+                    var alamat = siswa.alamat;
+                    var alamatDibatasi = alamat.length > maxPanjang ? alamat.substring(0, maxPanjang) + '...' :
+                        alamat;
                     var html = `
                             <tr>
                                 <td>${index + 1}.</td>
@@ -416,8 +442,9 @@
                                 </td>
                                 <td>${siswa.class}</td>
                                 <td>${siswa.phone_number}</td>
-                                <td>${siswa.nik}</td>
+                                <td>${siswa.nisn}</td>
                                 <td>${siswa.gender}</td>
+                                <td data-bs-toggle="tooltip" aria-label="${siswa.alamat}" data-bs-original-title="${siswa.alamat}" title="${alamat}">${alamatDibatasi}</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning edit-btn" data-url="{{ url('edit-siswa/${siswa.id}') }}">
                                         <i class="ti ti-edit"></i>
@@ -429,6 +456,7 @@
                             </tr>
                         `;
                     $('#data-siswa-container').append(html);
+                    $('[data-bs-toggle="tooltip"]').tooltip();
                 });
             } else {
 
@@ -499,6 +527,11 @@
                                 $(this).next('.invalid-feedback').text('');
                             });
 
+                            $('#create-siswa-modal textarea').each(function() {
+                                $(this).removeClass('is-invalid');
+                                $(this).next('.invalid-feedback').text('');
+                            });
+
                             // Remove Datatable
                             var table = $('#list-siswa').DataTable().destroy();
 
@@ -515,13 +548,14 @@
                             modal.find('input:not(:radio)').val('');
                             modal.find('input[type="radio"]').prop('checked', false);
                             modal.find('input[type="file"]').val(null);
+                            modal.find('textarea').val(null);
                             modal.find('#create-image-preview').attr('src',
                                 'https://via.placeholder.com/200');
 
                             hideLoader();
 
                             // Swal Success
-                            showSuccessPopup('Berhasil', 'Berhasil menambah data');
+                            showSuccessPopup('Berhasil', 'Berhasil menambah data siswa');
                         }
                     },
                     error: function(xhr, status, error) {
@@ -542,6 +576,11 @@
                                     $(this).next('.invalid-feedback').text('');
                                 });
 
+                                $('#create-siswa-modal textarea').each(function() {
+                                    $(this).removeClass('is-invalid');
+                                    $(this).next('.invalid-feedback').text('');
+                                });
+
                                 Object.keys(errors).forEach(function(fieldName) {
                                     var input = $('#create-siswa-modal input[name="' +
                                         fieldName + '"]');
@@ -554,12 +593,20 @@
                                     select.addClass('is-invalid');
                                     select.next('.invalid-feedback').text(errors[
                                         fieldName][0]);
+
+                                    var textarea = $(
+                                        '#create-siswa-modal textarea[name="' +
+                                        fieldName + '"]');
+                                    textarea.addClass('is-invalid');
+                                    textarea.next('.invalid-feedback').text(errors[
+                                        fieldName][0]);
                                 });
 
                                 hideLoader();
                             };
                         } else {
                             // Swal Error
+                            hideLoader();
                             showErrorPopup('Gagal', 'Gagal menambah data, silahkan coba lagi');
                         };
                     }
@@ -583,6 +630,11 @@
                 });
 
                 $('#edit-siswa-modal select').each(function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').text('');
+                });
+
+                $('#edit-siswa-modal textarea').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).next('.invalid-feedback').text('');
                 });
@@ -672,6 +724,11 @@
                                 $(this).next('.invalid-feedback').text('');
                             });
 
+                            $('#edit-siswa-modal textarea').each(function() {
+                                $(this).removeClass('is-invalid');
+                                $(this).next('.invalid-feedback').text('');
+                            });
+
                             // Remove Datatable
                             var table = $('#list-siswa').DataTable().destroy();
 
@@ -687,13 +744,14 @@
                             modal.find('input:not(:radio)').val('');
                             modal.find('input[type="radio"]').prop('checked', false);
                             modal.find('input[type="file"]').val(null);
+                            modal.find('textarea').val(null);
                             modal.find('#edit-image-preview').attr('src',
                                 'https://via.placeholder.com/200');
 
                             hideLoader();
 
                             // Swal Success
-                            showSuccessPopup('Berhasil', 'Berhasil mengedit data');
+                            showSuccessPopup('Berhasil', 'Berhasil mengedit data siswa');
                         };
                     },
                     error: function(xhr, status, error) {
@@ -714,6 +772,11 @@
                                     $(this).next('.invalid-feedback').text('');
                                 });
 
+                                $('#edit-siswa-modal textarea').each(function() {
+                                    $(this).removeClass('is-invalid');
+                                    $(this).next('.invalid-feedback').text('');
+                                });
+
                                 Object.keys(errors).forEach(function(fieldName) {
                                     var input = $('#edit-siswa-modal input[name="' +
                                         fieldName + '"]');
@@ -725,6 +788,13 @@
                                         fieldName + '"]');
                                     select.addClass('is-invalid');
                                     select.next('.invalid-feedback').text(errors[
+                                        fieldName][0]);
+
+                                    var textarea = $(
+                                        '#edit-siswa-modal textarea[name="' +
+                                        fieldName + '"]');
+                                    textarea.addClass('is-invalid');
+                                    textarea.next('.invalid-feedback').text(errors[
                                         fieldName][0]);
                                 });
 
@@ -781,7 +851,7 @@
 
                                 hideLoader();
                                 // Swal Success
-                                showSuccessPopup('Berhasil', 'Berhasil menghapus data');
+                                showSuccessPopup('Berhasil', 'Berhasil menghapus data siswa');
                             }
                         },
                         error: function(error) {
@@ -798,8 +868,23 @@
     {{-- Script for Import Siswa --}}
     <script>
         $('#btn-import').on('click', function() {
-            $('#import-input').click();
+            Swal.fire({
+                text: "Ikuti format diatas ini untuk menggunakan import excel!",
+                imageUrl: '{{ asset('assets/images/excel_format/Screenshot 2024-01-16 155341.png') }}',
+                imageWidth: 450,
+                imageHeight: 150,
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, baiklah!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#import-input').click();
+                }
+            });
         });
+
         $('#import-input').on('change', function() {
             showLoader();
 
@@ -814,6 +899,11 @@
                 contentType: false,
                 success: function(response) {
                     if (response.success) {
+                        $('#import-input').val('');
+
+                        // Remove Datatable
+                        var table = $('#list-siswa').DataTable().destroy();
+
                         // Handle Success Response
                         handleSuccessResponse(response);
 
@@ -822,14 +912,18 @@
 
                         hideLoader();
                         showSuccessPopup('Berhasil', 'Berhasil mengimport siswa');
+                    } else {
+                        // Handle validation error
+                        Swal.fire('Gagal', response.error, 'error');
                     }
                 },
                 error: function(error) {
                     $('#import-input').val('');
                     hideLoader();
-                    showErrorPopup('Gagal', 'Gagal mengimport siswa');
+                    showErrorPopup('Gagal',
+                        'Mohon perhatikan format, duplikasi data, atau data yang rumpang!');
                 }
-            })
+            });
         });
     </script>
     {{-- Script for Import Siswa --}}
