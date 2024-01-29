@@ -127,18 +127,6 @@
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
-                                {{-- <div class="mb-3">
-                                    <label for="" class="form-label">Nomor Telpon</label>
-                                    <input type="number" name="phone_number" class="form-control"
-                                        placeholder="Contoh : 085XXXXXXXXX">
-                                    <div class="invalid-feedback"></div>
-                                </div> --}}
-                                {{-- <div class="mb-3">
-                                    <label for="" class="form-label">NIK</label>
-                                    <input type="number" name="nik" class="form-control"
-                                        placeholder="Contoh format NIK  [YYMMDD] [RRRR] [KK]">
-                                    <div class="invalid-feedback"></div>
-                                </div> --}}
                                 <div class="mb-3">
                                     <label class="form-label">Jenis Kelamin :</label>
                                     <div class="form-check">
@@ -149,19 +137,24 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender" id="create-perempuan"
-                                            value="P">
+                                        <input class="form-check-input" type="radio" name="gender"
+                                            id="create-perempuan" value="P">
                                         <label class="form-check-label cursor-pointer" for="create-perempuan">
                                             Perempuan
                                         </label>
                                     </div>
                                     <div class="invalid-feedback"></div>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat :</label>
+                                    <textarea class="form-control" name="alamat" id="" cols="30" rows="5"></textarea>
+                                    <div class="invalid-feedback"></div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="text-center mt-2 mb-4">
-                                    <img id="create-image-preview" src="https://via.placeholder.com/200" alt="Preview Image"
-                                        class="img-fluid mb-3 image-preview">
+                                    <img id="create-image-preview" src="https://via.placeholder.com/200"
+                                        alt="Preview Image" class="img-fluid mb-3 image-preview">
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFileLg" class="form-label">Masukkan foto siswa jika ada

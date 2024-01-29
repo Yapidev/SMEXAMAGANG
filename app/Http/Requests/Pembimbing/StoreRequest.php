@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
             'image' => 'nullable|image|mimes=jpg,jpeg,png|max:2000',
             'gender' => 'required|in:laki-laki,perempuan',
             'jurusan' => 'required',
-            'tempat_pkl' => 'required'
+            'tempat_pkl' => 'required',
+            'alamat'  => 'required'
         ];
     }
 

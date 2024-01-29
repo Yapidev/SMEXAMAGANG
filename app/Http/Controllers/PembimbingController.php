@@ -48,6 +48,7 @@ class PembimbingController extends Controller
                 'jurusan' => $request->jurusan,
                 'tempat_prakerin_id' => $request->tempat,
                 'image' => $nameImage,
+                'alamat' => $request->alamat
             ];
 
             Pembimbing::create($data);
@@ -99,6 +100,7 @@ class PembimbingController extends Controller
                 'jurusan' => $request->jurusan,
                 'tempat_prakerin_id' => $request->tempat,
                 'image' => $nameImage,
+                'alamat' => $request->alamat
             ];
 
             $pembimbing->update($data);
@@ -114,6 +116,12 @@ class PembimbingController extends Controller
         }
     }
 
+    /**
+     * destroy function untuk delete data pembimbing terkait
+     *
+     * @param  mixed $pembimbing
+     * @return void
+     */
     public function destroy(Pembimbing $pembimbing)
     {
         $pembimbing->delete();

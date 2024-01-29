@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 class SiswaController extends Controller
 {
     /**
-     * index
+     * index fungsi untuk return halaman siswa prakerin
      *
      * @return void
      */
@@ -27,7 +27,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * create
+     * create fungsi untuk menambah data siswa prakerin
      *
      * @param  mixed $request
      * @return void
@@ -64,7 +64,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * edit
+     * edit fungsi untuk get data siswa tertentu yang mau di edit
      *
      * @param  mixed $siswa
      * @return void
@@ -75,7 +75,7 @@ class SiswaController extends Controller
     }
 
     /**
-     * update
+     * update fungsi untuk update data siswa prakerin terkait
      *
      * @param  mixed $request
      * @param  mixed $siswa
@@ -112,13 +112,12 @@ class SiswaController extends Controller
 
             return response()->json(['success' => 'Berhasil', 'dataSiswa' => $dataSiswa], 200);
         } catch (\Throwable $e) {
-            dd($e);
             return response()->json(['message' => 'Terjadi kesalahan saat membuat siswa' . $e->getMessage()], 500);
         }
     }
 
     /**
-     * destroy
+     * destroy fungsi untuk menghapus data siswa terkait
      *
      * @param  mixed $siswa
      * @return void
