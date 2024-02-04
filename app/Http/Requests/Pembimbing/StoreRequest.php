@@ -46,7 +46,8 @@ class StoreRequest extends FormRequest
             'gender.required' => 'Jenis kelamin harus dipilih.',
             'gender.in' => 'Jenis kelamin harus "laki-laki" atau "perempuan".',
             'jurusan.required' => 'Jurusan harus diisi.',
-            'tempat_pkl' => 'Tempat Prakerin harus diisi.'
+            'tempat_pkl' => 'Tempat Prakerin harus diisi.',
+            'alamat.required' => 'Alamat harus diisi'
         ];
     }
 }

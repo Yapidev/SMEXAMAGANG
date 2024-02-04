@@ -750,8 +750,13 @@
 
                             hideLoader();
 
-                            // Swal Success
-                            showSuccessPopup('Berhasil', 'Berhasil mengedit data siswa');
+                            if (response.success == 'Berhasil mengedit data siswa') {
+                                // Swal Success
+                                showSuccessPopup('Berhasil', response.success);
+                            } else {
+                                // Swal Info
+                                showWarningPopup('Info', response.success)
+                            }
                         };
                     },
                     error: function(xhr, status, error) {

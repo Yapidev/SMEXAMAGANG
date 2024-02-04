@@ -110,7 +110,11 @@ class SiswaController extends Controller
                 ->latest()
                 ->get();
 
-            return response()->json(['success' => 'Berhasil', 'dataSiswa' => $dataSiswa], 200);
+            if ($siswa->wasChanged()) {
+                return response()->json(['success' => 'Berhasil mengedit data siswa', 'dataSiswa' => $dataSiswa], 200);
+            } else {
+                return response()->json(['success' => 'Tidak ada data yang berubah', 'dataSiswa' => $dataSiswa], 200);
+            }
         } catch (\Throwable $e) {
             return response()->json(['message' => 'Terjadi kesalahan saat membuat siswa' . $e->getMessage()], 500);
         }

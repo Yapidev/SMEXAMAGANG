@@ -157,7 +157,7 @@
                                         alt="Preview Image" class="img-fluid mb-3 image-preview">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFileLg" class="form-label">Masukkan foto siswa jika ada
+                                    <label for="formFileLg" class="form-label">Masukkan foto pembimbing jika ada
                                         (Opsional)</label>
                                     <input class="form-control" id="formFileLg" type="file" name="image"
                                         accept="image/*" onchange="createPreviewImage(event)" />
@@ -196,44 +196,28 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="pesan" class="form-label">Kelas :</label>
-                                    <select name="class" class="form-control" id="">
-                                        <option value="" selected disabled>Pilih Kelas</option>
+                                    <label for="untuk" class="form-label">Jurusan :</label>
+                                    <select name="jurusan" class="form-control" id="">
+                                        <option value="" selected disabled>Pilih Jurusan</option>
                                         <!-- Kelas X -->
-                                        <option value="XRPL1">X RPL 1</option>
-                                        <option value="XRPL2">X RPL 2</option>
-                                        <option value="XMP1">X MP 1</option>
-                                        <option value="XMP2">X MP 2</option>
-                                        <option value="XBD1">X BD 1</option>
-                                        <option value="XBD2">X BD 2</option>
-                                        <option value="XAK1">X AK 1</option>
-                                        <option value="XAK2">X AK 2</option>
-                                        <option value="XLP1">X LP 1</option>
-                                        <option value="XLP2">X LP 2</option>
-
-                                        <!-- Kelas XI -->
-                                        <option value="XIRPL1">XI RPL 1</option>
-                                        <option value="XIRPL2">XI RPL 2</option>
-                                        <option value="XIMP1">XI MP 1</option>
-                                        <option value="XIMP2">XI MP 2</option>
-                                        <option value="XIBD1">XI BD 1</option>
-                                        <option value="XIBD2">XI BD 2</option>
-                                        <option value="XIAK1">XI AK 1</option>
-                                        <option value="XIAK2">XI AK 2</option>
-                                        <option value="XILP1">XI LP 1</option>
-                                        <option value="XILP2">XI LP 2</option>
-
-                                        <!-- Kelas XII -->
-                                        <option value="XIIRPL1">XII RPL 1</option>
-                                        <option value="XIIRPL2">XII RPL 2</option>
-                                        <option value="XIIMP1">XII MP 1</option>
-                                        <option value="XIIMP2">XII MP 2</option>
-                                        <option value="XIIBD1">XII BD 1</option>
-                                        <option value="XIIBD2">XII BD 2</option>
-                                        <option value="XIIAK1">XII AK 1</option>
-                                        <option value="XIIAK2">XII AK 2</option>
-                                        <option value="XIILP1">XII LP 1</option>
-                                        <option value="XIILP2">XII LP 2</option>
+                                        <option value="RPL">RPL</option>
+                                        <option value="AK">AK</option>
+                                        <option value="MP">MP</option>
+                                        <option value="LP">LP</option>
+                                        <option value="BD">BD</option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="untuk" class="form-label">Tempat Prakerin :</label>
+                                    <select name="tempat_pkl" class="form-control" id="">
+                                        <option value="" selected disabled>Pilih Tempat Prakerin</option>
+                                        <!-- Kelas X -->
+                                        <option value="RPL">RPL</option>
+                                        <option value="AK">AK</option>
+                                        <option value="MP">MP</option>
+                                        <option value="LP">LP</option>
+                                        <option value="BD">BD</option>
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
@@ -265,6 +249,11 @@
                                             Perempuan
                                         </label>
                                     </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat :</label>
+                                    <textarea class="form-control" name="alamat" id="" cols="30" rows="5"></textarea>
+                                    <div class="invalid-feedback"></div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -506,6 +495,11 @@
                                     $(this).next('.invalid-feedback').text('');
                                 });
 
+                                $('#create-siswa-modal textarea').each(function() {
+                                    $(this).removeClass('is-invalid');
+                                    $(this).next('.invalid-feedback').text('');
+                                });
+
                                 Object.keys(errors).forEach(function(fieldName) {
                                     var input = $('#create-siswa-modal input[name="' +
                                         fieldName + '"]');
@@ -517,6 +511,13 @@
                                         fieldName + '"]');
                                     select.addClass('is-invalid');
                                     select.next('.invalid-feedback').text(errors[
+                                        fieldName][0]);
+
+                                    var textarea = $(
+                                        '#create-siswa-modal textarea[name="' +
+                                        fieldName + '"]');
+                                    textarea.addClass('is-invalid');
+                                    textarea.next('.invalid-feedback').text(errors[
                                         fieldName][0]);
                                 });
 
@@ -547,6 +548,11 @@
                 });
 
                 $('#edit-siswa-modal select').each(function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').text('');
+                });
+
+                $('#edit-siswa-modal textarea').each(function() {
                     $(this).removeClass('is-invalid');
                     $(this).next('.invalid-feedback').text('');
                 });
@@ -636,6 +642,11 @@
                                 $(this).next('.invalid-feedback').text('');
                             });
 
+                            $('#edit-siswa-modal textarea').each(function() {
+                                $(this).removeClass('is-invalid');
+                                $(this).next('.invalid-feedback').text('');
+                            });
+
                             // Remove Datatable
                             var table = $('#list-siswa').DataTable().destroy();
 
@@ -656,8 +667,13 @@
 
                             hideLoader();
 
-                            // Swal Success
-                            showSuccessPopup('Berhasil', 'Berhasil mengedit data');
+                            if (response.success == 'Berhasil mengedit data pembimbing') {
+                                // Swal Success
+                                showSuccessPopup('Berhasil', 'Berhasil mengedit data');
+                            } else {
+                                // Swal Info
+                                showWarningPopup('Info', response.success)
+                            }
                         };
                     },
                     error: function(xhr, status, error) {
@@ -678,6 +694,11 @@
                                     $(this).next('.invalid-feedback').text('');
                                 });
 
+                                $('#edit-siswa-modal textarea').each(function() {
+                                    $(this).removeClass('is-invalid');
+                                    $(this).next('.invalid-feedback').text('');
+                                });
+
                                 Object.keys(errors).forEach(function(fieldName) {
                                     var input = $('#edit-siswa-modal input[name="' +
                                         fieldName + '"]');
@@ -689,6 +710,13 @@
                                         fieldName + '"]');
                                     select.addClass('is-invalid');
                                     select.next('.invalid-feedback').text(errors[
+                                        fieldName][0]);
+
+                                    var textarea = $(
+                                        '#edit-siswa-modal textarea[name="' +
+                                        fieldName + '"]');
+                                    textarea.addClass('is-invalid');
+                                    textarea.next('.invalid-feedback').text(errors[
                                         fieldName][0]);
                                 });
 

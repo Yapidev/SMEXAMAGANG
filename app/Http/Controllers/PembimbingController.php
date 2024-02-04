@@ -59,7 +59,6 @@ class PembimbingController extends Controller
 
             return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $dataPembimbing], 200);
         } catch (\Throwable $e) {
-            dd($e);
             return response()->json(['message' => 'Terjadi kesalahan saat membuat siswa' . $e->getMessage()], 500);
         }
     }
@@ -109,9 +108,13 @@ class PembimbingController extends Controller
                 ->latest()
                 ->get();
 
-            return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $dataPembimbing], 200);
+            if ($pembimbing->wasChanged()) {
+                return response()->json(['success' => 'Berhasil mengedit data pembimbing', 'dataPembimbing' => $dataPembimbing], 200);
+            } else {
+                return response()->json(['success' => 'Tidak ada perubahan', 'dataPembimbing' => $dataPembimbing], 200);
+            }
+
         } catch (\Throwable $e) {
-            dd($e);
             return response()->json(['message' => 'Terjadi kesalahan saat mengupdate dataPembimbing' . $e->getMessage()], 500);
         }
     }

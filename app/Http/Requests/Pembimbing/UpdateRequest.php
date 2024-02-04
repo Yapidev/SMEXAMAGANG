@@ -26,7 +26,8 @@ class UpdateRequest extends FormRequest
             'image' => 'nullable|image|mimes=jpg,jpeg,png|max:2000',
             'gender' => 'required|in:laki-laki,perempuan',
             'jurusan' => 'required',
-            'tempat_pkl' => 'required'
+            'tempat_pkl' => 'required',
+            'alamat' => 'required'
         ];
     }
 
@@ -46,7 +47,8 @@ class UpdateRequest extends FormRequest
             'gender.required' => 'Jenis kelamin harus dipilih.',
             'gender.in' => 'Jenis kelamin harus "laki-laki" atau "perempuan".',
             'jurusan.required' => 'Jurusan harus diisi.',
-            'tempat_pkl' => 'Tempat Prakerin harus diisi.'
+            'tempat_pkl' => 'Tempat Prakerin harus diisi.',
+            'alamat.required' => 'Alamat harus diisi'
         ];
     }
 }
