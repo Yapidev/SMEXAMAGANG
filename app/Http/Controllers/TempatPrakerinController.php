@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TempatPrakerin\StoreRequest;
 use App\Http\Requests\TempatPrakerin\UpdateRequest;
 use App\Models\TempatPrakerin;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class TempatPrakerinController extends Controller
 {
@@ -30,9 +28,9 @@ class TempatPrakerinController extends Controller
                 $validatedData['image'] = $request->image->store('uploads/tempatPrakerin/', 'public');
             }
             TempatPrakerin::create($validatedData);
-            return redirect()->back()->with('messages', 'Berhasil Menambah Data')->withStatus(201);
+            return redirect()->back()->with('success', 'Berhasil Menambah Data')->withStatus(201);
         } catch (\Exception $e) {
-            return redirect()->back()->with('messages', 'Gagal Menambah Data. ' . $e->getMessage())->withStatus(400);
+            return redirect()->back()->with('error', 'Gagal Menambah Data. ' . $e->getMessage())->withStatus(400);
         }
     }
 
@@ -50,9 +48,9 @@ class TempatPrakerinController extends Controller
                 $validatedUpdate['image'] = $tempatPrakerin->image;
             }
             $tempatPrakerin->update($validatedUpdate);
-            return redirect()->back()->with('messages', 'Berhasil Memperbarui Data')->withStatus(200);
+            return redirect()->back()->with('success', 'Berhasil Memperbarui Data')->withStatus(200);
         } catch (\Exception $e) {
-            return redirect()->back()->with('messages', 'Gagal Memperbarui Data. ' . $e->getMessage())->withStatus(400);
+            return redirect()->back()->with('error', 'Gagal Memperbarui Data. ' . $e->getMessage())->withStatus(400);
         }
     }
 
@@ -61,9 +59,9 @@ class TempatPrakerinController extends Controller
         try {
             $prakerin = TempatPrakerin::findOrFail($id);
             $prakerin->delete($id);
-            return redirect()->back()->with('messages', 'Berhasil Menghapus Data')->withStatus(202);
+            return redirect()->back()->with('success', 'Berhasil Menghapus Data')->withStatus(202);
         } catch (\Exception $e) {
-            return redirect()->back()->with('messages', 'Gagal Menghapus Data' . $e->getMessage())->withStatus(400);
+            return redirect()->back()->with('error', 'Gagal Menghapus Data' . $e->getMessage())->withStatus(400);
         }
     }
 }

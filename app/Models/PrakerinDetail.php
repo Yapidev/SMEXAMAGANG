@@ -2,25 +2,18 @@
 
 namespace App\Models;
 
-use App\Traits\UUIDAsPrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Pembimbing extends Model
+class PrakerinDetail extends Model
 {
-    use HasFactory, UUIDAsPrimaryKey;
+    use HasFactory;
 
-    protected $table = 'pembimbings';
+    protected $table = 'prakerin_details';    
 
     protected $guarded = ['id'];
 
-    /**
-     * prakerins
-     *
-     * @return HasOne
-     */
     public function prakerins(): HasMany
     {
         return $this->hasMany(Prakerin::class);

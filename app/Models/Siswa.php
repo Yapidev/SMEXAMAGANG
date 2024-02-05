@@ -20,7 +20,7 @@ class Siswa extends Model
      *
      * @return HasMany
      */
-    public function prakerin(): HasMany
+    public function prakerins(): HasMany
     {
         return $this->hasMany(Prakerin::class);
     }

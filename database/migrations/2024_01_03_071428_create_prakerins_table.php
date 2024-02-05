@@ -13,18 +13,11 @@ return new class extends Migration
     {
         Schema::create('prakerins', function (Blueprint $table) {
             $table->uuid('id')->primary();
-
-            $table->uuid('siswas_id');
-            $table->uuid('tempat_prakerins_id');
-            $table->uuid('pembimbings_id');
-
-            $table->foreign('siswas_id')->references('id')->on('siswas');
-            $table->foreign('tempat_prakerins_id')->references('id')->on('tempat_prakerins');
-            $table->foreign('pembimbings_id')->references('id')->on('pembimbings');
-
+            $table->foreignUuid('siswa_id')->constrained('siswas')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignUuid('tempat_prakerin_id')->constrained('tempat_prakerins')->onDelete('restrict')->onUpdate('cascade');         
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
-            $table->enum('status', ['sedang_magang', 'selesai', 'diberhentikan']);
+            $table->enum('status', ['belum_magang','sedang_magang', 'selesai', 'diberhentikan']);
             $table->timestamps();
         });
     }

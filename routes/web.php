@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     // Route Controller Prakerin
     Route::controller(PrakerinController::class)->group(function () {
         Route::get('prakerin', 'index')->name('prakerin.index');
-        Route::post('prakerin', 'store')->name('prakerin.store');
+        Route::post('prakerin/store', 'store')->name('prakerin.store');
         Route::put('prakerin/{id}', 'update')->name('prakerin.update');
         Route::delete('prakerin/{id}', 'destroy')->name('prakerin.destroy');
     });
