@@ -283,7 +283,9 @@
         event.preventDefault();
       }
     });
+  </script>
 
+  <script>
     document.getElementById('formTambah').addEventListener('submit', function(event) {
       var name = $('#name').val();
       var description = $('#description').val();
@@ -358,7 +360,6 @@
       }
     });
   </script>
-
 
   <script>
     $(document).ready(function() {
