@@ -44,7 +44,7 @@
                     <option></option>
                     @foreach ($tempatPrakerin as $dataPrakerin)
                       <option value="{{ $dataPrakerin->id }}">{{ $dataPrakerin->name }}</option>
-                    @endforeach 
+                    @endforeach
                   </select>
                 </div>
                 <div class="mb-3 row">
@@ -68,6 +68,8 @@
       </div>
     </div>
   </div>
+
+  {{-- Card Projek --}}
 @endsection
 @section('script')
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>

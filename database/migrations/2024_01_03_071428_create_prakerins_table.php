@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('prakerins', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('siswa_id')->constrained('siswas')->onDelete('restrict')->onUpdate('cascade');
             $table->foreignUuid('tempat_prakerin_id')->constrained('tempat_prakerins')->onDelete('restrict')->onUpdate('cascade');         
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
