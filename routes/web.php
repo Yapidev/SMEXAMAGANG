@@ -43,9 +43,10 @@ Route::middleware('auth')->group(function () {
     // Route Controller Pembimbing
     Route::controller(PembimbingController::class)->group(function () {
         Route::get('list-pembimbing', 'index')->name('pembimbing.index');
-        Route::post('list-pembimbing', 'store')->name('pembimbing.store');
-        Route::put('list-pembimbing/{id}', 'update')->name('pembimbing.update');
-        Route::delete('list-pembimbing/{id}', 'destroy')->name('pembimbing.destroy');
+        Route::post('create-pembimbing', 'store')->name('pembimbing.store');
+        Route::get('edit-pembimbing/{pembimbing}', 'edit')->name('pembimbing.edit');
+        Route::put('update-pembimbing/{pembimbing}', 'update')->name('pembimbing.update');
+        Route::delete('destroy-pembimbing/{pembimbing}', 'destroy')->name('pembimbing.destroy');
     });
 
     // Route Controller Prakerin

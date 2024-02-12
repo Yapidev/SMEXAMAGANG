@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Pembimbing;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -21,12 +22,16 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $pembimbingId = $this->route('pembimbing');
         return [
-            'name' => 'required|unique:pembimbings,name',
-            'image' => 'nullable|image|mimes=jpg,jpeg,png|max:2000',
-            'gender' => 'required|in:laki-laki,perempuan',
+            'name' => [
+                'required',
+                Rule::unique('pembimbings', 'name')->ignore($pembimbingId)
+            ],
+            'image' => 'nullable|image|max:2000',
+            'gender' => 'required|in:L,P',
             'jurusan' => 'required',
-            'tempat_pkl' => 'required',
+            'tempat_prakerins_id' => 'required',
             'alamat' => 'required'
         ];
     }
@@ -47,7 +52,7 @@ class UpdateRequest extends FormRequest
             'gender.required' => 'Jenis kelamin harus dipilih.',
             'gender.in' => 'Jenis kelamin harus "laki-laki" atau "perempuan".',
             'jurusan.required' => 'Jurusan harus diisi.',
-            'tempat_pkl' => 'Tempat Prakerin harus diisi.',
+            'tempat_prakerins_id' => 'Tempat Prakerin harus diisi.',
             'alamat.required' => 'Alamat harus diisi'
         ];
     }

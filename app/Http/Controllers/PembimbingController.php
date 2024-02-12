@@ -21,10 +21,14 @@ class PembimbingController extends Controller
     public function index()
     {
         $dataPembimbing = Pembimbing::query()
+            ->with('tempatPrakerin')
             ->latest()
             ->get();
 
-        return view('pembimbing.index', compact('dataPembimbing'));
+        $tempatPrakerin = TempatPrakerin::query()
+            ->get();
+
+        return view('pembimbing.index', compact('dataPembimbing', 'tempatPrakerin'));
     }
 
     /**
@@ -46,7 +50,7 @@ class PembimbingController extends Controller
                 'name' => ucwords($request->name),
                 'gender' => $request->gender,
                 'jurusan' => $request->jurusan,
-                'tempat_prakerin_id' => $request->tempat,
+                'tempat_prakerins_id' => $request->tempat_pkl,
                 'image' => $nameImage,
                 'alamat' => $request->alamat
             ];
@@ -54,12 +58,13 @@ class PembimbingController extends Controller
             Pembimbing::create($data);
 
             $dataPembimbing = Pembimbing::query()
+                ->with('tempatPrakerin')
                 ->latest()
                 ->get();
 
             return response()->json(['success' => 'Berhasil', 'dataPembimbing' => $dataPembimbing], 200);
         } catch (\Throwable $e) {
-            return response()->json(['message' => 'Terjadi kesalahan saat membuat siswa' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Terjadi kesalahan saat menambah data Pembimbing' . $e->getMessage()], 500);
         }
     }
 
@@ -97,7 +102,7 @@ class PembimbingController extends Controller
                 'name' => ucwords($request->name),
                 'gender' => $request->gender,
                 'jurusan' => $request->jurusan,
-                'tempat_prakerin_id' => $request->tempat,
+                'tempat_prakerins_id' => $request->tempat_prakerins_id,
                 'image' => $nameImage,
                 'alamat' => $request->alamat
             ];
@@ -105,6 +110,7 @@ class PembimbingController extends Controller
             $pembimbing->update($data);
 
             $dataPembimbing = Pembimbing::query()
+                ->with('tempatPrakerin')
                 ->latest()
                 ->get();
 
@@ -113,7 +119,6 @@ class PembimbingController extends Controller
             } else {
                 return response()->json(['success' => 'Tidak ada perubahan', 'dataPembimbing' => $dataPembimbing], 200);
             }
-
         } catch (\Throwable $e) {
             return response()->json(['message' => 'Terjadi kesalahan saat mengupdate dataPembimbing' . $e->getMessage()], 500);
         }
@@ -130,6 +135,7 @@ class PembimbingController extends Controller
         $pembimbing->delete();
 
         $dataPembimbing = Pembimbing::query()
+            ->with('tempatPrakerin')
             ->latest()
             ->get();
 

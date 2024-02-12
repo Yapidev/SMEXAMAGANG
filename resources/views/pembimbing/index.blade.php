@@ -37,6 +37,8 @@
                                         <th>No.</th>
                                         <th>Nama</th>
                                         <th>Jurusan</th>
+                                        <th>Tempat Prakerin</th>
+                                        <th>Alamat</th>
                                         <th>Gender</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -56,14 +58,16 @@
                                                 </div>
                                             </td>
                                             <td>{{ $data->jurusan }}</td>
+                                            <td>{{ $data->tempatPrakerin->name }}</td>
+                                            <td>{{ Str::limit($data->alamat, 20) }}</td>
                                             <td>{{ $data->gender }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-warning edit-btn"
-                                                    data-url="{{ route('siswa.edit', ['siswa' => $data->id]) }}">
+                                                    data-url="{{ route('pembimbing.edit', ['pembimbing' => $data->id]) }}">
                                                     <i class="ti ti-edit"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-danger delete-btn"
-                                                    data-url="{{ route('siswa.destroy', ['siswa' => $data->id]) }}">
+                                                    data-url="{{ route('pembimbing.destroy', ['pembimbing' => $data->id]) }}">
                                                     <i class="ti ti-trash"></i>
                                                 </button>
                                             </td>
@@ -118,12 +122,9 @@
                                     <label for="untuk" class="form-label">Tempat Prakerin :</label>
                                     <select name="tempat_pkl" class="form-control" id="">
                                         <option value="" selected disabled>Pilih Tempat Prakerin</option>
-                                        <!-- Kelas X -->
-                                        <option value="RPL">RPL</option>
-                                        <option value="AK">AK</option>
-                                        <option value="MP">MP</option>
-                                        <option value="LP">LP</option>
-                                        <option value="BD">BD</option>
+                                        @foreach ($tempatPrakerin as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
                                     </select>
                                     <div class="invalid-feedback"></div>
                                 </div>
@@ -137,8 +138,8 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gender"
-                                            id="create-perempuan" value="P">
+                                        <input class="form-check-input" type="radio" name="gender" id="create-perempuan"
+                                            value="P">
                                         <label class="form-check-label cursor-pointer" for="create-perempuan">
                                             Perempuan
                                         </label>
@@ -210,27 +211,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="untuk" class="form-label">Tempat Prakerin :</label>
-                                    <select name="tempat_pkl" class="form-control" id="">
+                                    <select name="tempat_prakerins_id" class="form-control" id="">
                                         <option value="" selected disabled>Pilih Tempat Prakerin</option>
-                                        <!-- Kelas X -->
-                                        <option value="RPL">RPL</option>
-                                        <option value="AK">AK</option>
-                                        <option value="MP">MP</option>
-                                        <option value="LP">LP</option>
-                                        <option value="BD">BD</option>
+                                        @foreach ($tempatPrakerin as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
                                     </select>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Nomor Telpon</label>
-                                    <input type="number" name="phone_number" class="form-control"
-                                        placeholder="Contoh : 085XXXXXXXXX">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">NIK</label>
-                                    <input type="number" name="nik" class="form-control"
-                                        placeholder="Contoh format NIK  [YYMMDD] [RRRR] [KK]">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
@@ -357,6 +343,10 @@
             var dataPembimbing = response.dataPembimbing;
             if (dataPembimbing && dataPembimbing.length > 0) {
                 $.each(dataPembimbing, function(index, siswa) {
+                    var maxPanjang = 20;
+                    var alamat = siswa.alamat;
+                    var alamatDibatasi = alamat.length > maxPanjang ? alamat.substring(0, maxPanjang) + '...' :
+                        alamat;
                     var html = `
                             <tr>
                                 <td>${index + 1}.</td>
@@ -370,12 +360,14 @@
                                     </div>
                                 </td>
                                 <td>${siswa.jurusan}</td>
+                                <td>${siswa.tempat_prakerin.name}</td>
                                 <td>${siswa.gender}</td>
+                                <td data-bs-toggle="tooltip" aria-label="${siswa.alamat}" data-bs-original-title="${siswa.alamat}" title="${alamat}">${alamatDibatasi}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning edit-btn" data-url="{{ url('edit-siswa/${siswa.id}') }}">
+                                    <button class="btn btn-sm btn-warning edit-btn" data-url="{{ url('edit-pembimbing/${siswa.id}') }}">
                                         <i class="ti ti-edit"></i>
                                     </button>
-                                    <button class="btn btn-sm btn-danger delete-btn" data-url="{{ url('destroy-siswa/${siswa.id}') }}">
+                                    <button class="btn btn-sm btn-danger delete-btn" data-url="{{ url('destroy-pembimbing/${siswa.id}') }}">
                                         <i class="ti ti-trash"></i>
                                     </button>
                                 </td>
@@ -383,9 +375,7 @@
                         `;
                     $('#data-siswa-container').append(html);
                 });
-            } else {
-
-            };
+            } else {};
         };
     </script>
     {{-- Script function handleSuccessResponse --}}
@@ -422,7 +412,7 @@
     </script>
     {{-- Script for Preview Image --}}
 
-    {{-- Script for Create Siswa --}}
+    {{-- Script for Create Pembimbing --}}
     <script>
         $(document).ready(function() {
             $('#create-siswa-form').on('submit', function(event) {
@@ -448,6 +438,11 @@
                             });
 
                             $('#create-siswa-modal select').each(function() {
+                                $(this).removeClass('is-invalid');
+                                $(this).next('.invalid-feedback').text('');
+                            });
+
+                            $('#create-siswa-modal textarea').each(function() {
                                 $(this).removeClass('is-invalid');
                                 $(this).next('.invalid-feedback').text('');
                             });
@@ -578,6 +573,8 @@
                                                 $(this).prop('checked', true);
                                             }
                                         });
+                                    } else if (fieldName === 'tempat_prakerins_id') {
+                                        inputField.val(value).trigger('change');
                                     }
                                 }
                             });
@@ -592,7 +589,7 @@
                                     'https://via.placeholder.com/200');
                             }
 
-                            var updateUrl = '{{ route('siswa.update', ['siswa' => 'id']) }}';
+                            var updateUrl = '{{ route('pembimbing.update', ['pembimbing' => 'id']) }}';
                             updateUrl = updateUrl.replace('id', response.dataPembimbing.id);
 
                             modal.find('.btn-light-info').attr('data-url', updateUrl);

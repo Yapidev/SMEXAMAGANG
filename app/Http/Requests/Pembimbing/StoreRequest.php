@@ -23,8 +23,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => 'nullable|image|mimes=jpg,jpeg,png|max:2000',
-            'gender' => 'required|in:laki-laki,perempuan',
+            'image' => 'nullable|image|max:2000',
+            'gender' => 'required|in:L,P',
             'jurusan' => 'required',
             'tempat_pkl' => 'required',
             'alamat'  => 'required'
