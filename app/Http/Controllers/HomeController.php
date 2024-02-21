@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembimbing;
 use App\Models\Prakerin;
+use App\Models\PrakerinDetail;
 use App\Models\Siswa;
 use App\Models\TempatPrakerin;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class HomeController extends Controller
         $siswaQuery = Siswa::query();
         $pembimbingQuery = Pembimbing::query();
         $tempatPrakerinQuery = TempatPrakerin::query();
-        $prakerinQuery = Prakerin::query();
+        $prakerinQuery = PrakerinDetail::query();
 
         $carouselData = [
             'siswa' => $siswaQuery->count(),

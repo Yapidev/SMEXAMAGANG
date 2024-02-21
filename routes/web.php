@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -53,7 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(PrakerinController::class)->group(function () {
         Route::get('prakerin', 'index')->name('prakerin.index');
         Route::post('prakerin/store', 'store')->name('prakerin.store');
-        Route::put('prakerin/{id}', 'update')->name('prakerin.update');
+        Route::put('prakerin/update/{id}', 'update')->name('prakerin.update');
+        Route::get('prakerin/detail/{id}', 'show')->name('prakerin.show');
         Route::delete('prakerin/{id}', 'destroy')->name('prakerin.destroy');
     });
 

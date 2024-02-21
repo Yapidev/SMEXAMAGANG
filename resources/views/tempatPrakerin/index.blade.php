@@ -7,6 +7,21 @@
 
 
 @section('content')
+  <div class="card bg-white shadow-sm position-relative overflow-hidden">
+    <div class="card-body px-4 py-3">
+      <div class="row align-items-center">
+        <div class="col-9">
+          <h4 class="fw-semibold mb-8">List Tempat Prakerin</h4>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item" aria-current="page">Tempat Prakerin</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row mb-3">
     <div class="col-12 col-md-12 align-items-end">
       <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modaltambah">Tambah Tempat Prakerin <i
@@ -17,7 +32,7 @@
   <div class="row">
     @forelse ($prakerin as $data)
       <div class="col-12 col-md-4">
-        <div class="card-custome">
+        <div class="card-custome border">
           <div class="card-image">
             <a href="javascript:void(0)" class="card text-white w-100 card-hover"
               style="background: url('{{ asset('storage/' . $data->image) }}') center; background-size: cover; width: 100%; height: 200px; object-fit: cover;">

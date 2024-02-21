@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TempatPrakerin\StoreRequest;
 use App\Http\Requests\TempatPrakerin\UpdateRequest;
+use App\Models\Prakerin;
 use App\Models\TempatPrakerin;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,11 +28,23 @@ class TempatPrakerinController extends Controller
             if ($request->hasFile('image')) {
                 $validatedData['image'] = $request->image->store('uploads/tempatPrakerin/', 'public');
             }
-            TempatPrakerin::create($validatedData);
+            $createData = TempatPrakerin::create($validatedData);
+
+            Prakerin::create([
+                'tempat_prakerin_id' => $createData->id,
+            ]);
+
             return redirect()->back()->with('success', 'Berhasil Menambah Data')->withStatus(201);
         } catch (\Exception $e) {
+            dd($e);
             return redirect()->back()->with('error', 'Gagal Menambah Data. ' . $e->getMessage())->withStatus(400);
         }
+    }
+
+    public function show($id) {
+        $tempat = TempatPrakerin::findOrFail($id);
+
+        return view('tempatPrakerin.show', compact('tempat'));
     }
 
     public function update(UpdateRequest $request, $id)

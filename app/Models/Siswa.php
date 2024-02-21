@@ -24,4 +24,9 @@ class Siswa extends Model
     {
         return $this->hasMany(Prakerin::class);
     }
+
+    public function prakerinDetail(): HasMany
+    {
+        return $this->hasMany(PrakerinDetail::class);
+    }
 }

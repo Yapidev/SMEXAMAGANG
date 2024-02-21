@@ -45,7 +45,7 @@ class Prakerin extends Model
         return $this->belongsTo(TempatPrakerin::class);
     }
 
-    public function PrakerinDetail(): BelongsTo
+    public function prakerinDetail(): BelongsTo
     {
         return $this->belongsTo(PrakerinDetail::class);
     }
