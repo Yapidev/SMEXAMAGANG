@@ -38,11 +38,13 @@ class PrakerinController extends Controller
         $prakerinData = PrakerinDetail::where('prakerin_id', $id)->orderByRaw("FIELD(status, 'sedang_magang', 'selesai_magang', 'diberhentikan')")->paginate(10);
 
         // Data Count
-        $siswaaktifcount = PrakerinDetail::where('status', 'sedang_magang')->count();
-        $siswaselesaicount = PrakerinDetail::where('status', 'selesai_magang')->count();
+        $siswaaktifcount = PrakerinDetail::where('prakerin_id', $id)->where('status', 'sedang_magang')->count();
+        $siswaselesaicount = PrakerinDetail::where('prakerin_id', $id)->where('status', 'selesai_magang')->count();
 
         // Data untuk Form
-        $siswa = Siswa::all();
+        $siswa = Siswa::whereNotIn('id', function ($query) {
+            $query->select('siswa_id')->from('prakerin_details');
+        })->get();
         $tempatPrakerin = TempatPrakerin::all();
 
         if ($prakerinData) {
