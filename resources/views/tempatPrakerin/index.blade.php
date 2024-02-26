@@ -43,6 +43,10 @@
               <div class="d-flex align-items-center">
                 <div class="ms-auto">
                   <div class="d-flex mt-4">
+                    <button class="me-2 fs-5" data-bs-target="#modalMap" id="buttonMap-{{ $data->id }}"
+                      data-latitude="{{ $data->latitude }}" data-longitude="{{ $data->longitude }}"
+                      data-id="{{ $data->id }}" data-name="{{ $data->name }}" data-bs-toggle="modal"
+                      style="border: none; background: transparent;"><i class="ti ti-map-2 text-white"></i></button>
                     <button class="me-2 fs-5" data-bs-target="#modalEdit{{ $data->id }}" data-bs-toggle="modal"
                       style="border: none; background: transparent;"><i class="ti ti-edit text-white"></i></button>
                     <form id="deleteForm" action="{{ route('tempatPrakerin.destroy', $data->id) }}" method="POST">
@@ -69,6 +73,23 @@
     @endforelse
   </div>
 
+  <div class="modal fade animated pulse" id="modalMap" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="textdetail"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+          <p class="fw-bold text-center">Lokasi Perusahaan</p>
+          <div class="preview-map-location" id="mapLocationData" style="width: 100%; height: 500px; border-radius: 20px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   {{-- Modal Edit --}}
   @foreach ($prakerin as $data)
     <div class="modal fade modal-edit animated pulse" id="modalEdit{{ $data->id }}" tabindex="-1"
@@ -92,8 +113,8 @@
                 <div class="row justify-content-center align-items-center">
                   <div class="mb-3">
                     <label class="form-label">Nama Perusahaan</label>
-                    <input id="name-edit" class="form-control" value="{{ $data->name }}" type="text" name="name"
-                      placeholder="Nama Perusahaan">
+                    <input id="name-edit" class="form-control" value="{{ $data->name }}" type="text"
+                      name="name" placeholder="Nama Perusahaan">
                     <div id="name-error-edit"></div>
                   </div>
                   <div class="mb-3">
@@ -223,6 +244,50 @@
 @section('script')
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    $(document).ready(function() {
+      var mapLocation;
+
+      $('button[id^="buttonMap-"]').on('click', function() {
+        var latitude = $(this).data('latitude');
+        var longitude = $(this).data('longitude');
+        var name = $(this).data('name');
+        var id = $(this).data('id');
+
+        var textDetail = $("#textdetail");
+        textDetail.html('');
+        textDetail.append(`<p>Detail Perusahaan ${name}</p>`);
+
+        $('#modalMap').on('shown.bs.modal', function() {
+          initializeMapLocation(id, latitude, longitude);
+        });
+      });
+
+      function initializeMapLocation(id, latitude, longitude) {
+
+        if (mapLocation) {
+          mapLocation.remove();
+        }
+
+        mapLocation = L.map('mapLocationData').setView([latitude, longitude], 18);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: ''
+        }).addTo(mapLocation);
+
+        L.marker([latitude, longitude]).addTo(mapLocation)
+          .bindPopup('Ini lokasi perusahaannya!');
+
+        mapLocation.on('resize', function() {
+          setTimeout(function() {
+            mapLocation.invalidateSize();
+          }, 400);
+        });
+      };
+    });
+  </script>
+
   {{-- Validasi --}}
   <script>
     document.getElementById('formEdit').addEventListener('submit', function(event) {
