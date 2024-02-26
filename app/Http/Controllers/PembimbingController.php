@@ -47,8 +47,8 @@ class PembimbingController extends Controller
             }
 
             $data = [
-                'name' => ucwords($request->name),
-                'gender' => $request->gender,
+                'judul' => ucwords($request->name),
+                'deskripsi' => $request->gender,
                 'jurusan' => $request->jurusan,
                 'tempat_prakerins_id' => $request->tempat_pkl,
                 'image' => $nameImage,
