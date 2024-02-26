@@ -67,20 +67,18 @@
     $(function() {
     var carouselData = @json($carouselData);
 
-    // Manual inclusion of 5 years in the range
-    var years = [];
-    for (var i = carouselData.tahun[0]; i >= carouselData.tahun[0] - 4; i--) {
-        years.push(i);
-    }
-
-    var data = years.map(function(year) {
-        return carouselData.tahun.includes(year) ? Math.round(carouselData.totalSiswa[carouselData.tahun.indexOf(year)]) : 0;
-    });
-
     var options_spline = {
         series: [{
-            name: "Total Siswa",
-            data: data,
+            name: "Magang",
+            data: carouselData.data.map(item => item.aktif),
+        },
+        {
+            name: "Selesai",
+            data: carouselData.data.map(item => item.selesai),
+        },
+        {
+            name: "Diberhentikan",
+            data: carouselData.data.map(item => item.diberhentikan),
         }],
         chart: {
             fontFamily: "DM Sans, sans-serif",
@@ -91,7 +89,7 @@
             },
         },
         xaxis: {
-            categories: years,
+            categories: carouselData.data.map(item => item.tahun),
             labels: {
                 rotate: -45,
             },
@@ -106,7 +104,7 @@
                 }
             }
         },
-        colors: ["#615dff"],
+        colors: ["#615dff", "#3dd9eb", "#ff6384"],
         tooltip: {
             theme: "dark",
         },
