@@ -65,92 +65,58 @@
   <script src="{{ asset('assets/js/apex-chart/apex.area.init.js') }}"></script>
   <script>
     $(function() {
-      var options_spline = {
+    var carouselData = @json($carouselData);
+
+    // Manual inclusion of 5 years in the range
+    var years = [];
+    for (var i = carouselData.tahun[0]; i >= carouselData.tahun[0] - 4; i--) {
+        years.push(i);
+    }
+
+    var data = years.map(function(year) {
+        return carouselData.tahun.includes(year) ? Math.round(carouselData.totalSiswa[carouselData.tahun.indexOf(year)]) : 0;
+    });
+
+    var options_spline = {
         series: [{
-            name: "series1",
-            data: [31, 40, 28, 51, 42, 109, 100],
-          },
-          {
-            name: "series2",
-            data: [11, 32, 45, 32, 34, 52, 41],
-          },
-        ],
+            name: "Total Siswa",
+            data: data,
+        }],
         chart: {
-          fontFamily: "DM Sans,sans-serif",
-          height: 350,
-          type: "area",
-          toolbar: {
-            show: false,
-          },
-        },
-        grid: {
-          show: false,
-        },
-        colors: ["#615dff", "#3dd9eb"],
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          curve: "smooth",
+            fontFamily: "DM Sans, sans-serif",
+            height: 350,
+            type: "area",
+            toolbar: {
+                show: false,
+            },
         },
         xaxis: {
-          type: "datetime",
-          categories: [
-            "2018-09-19T00:00:00.000Z",
-            "2018-09-19T01:30:00.000Z",
-            "2018-09-19T02:30:00.000Z",
-            "2018-09-19T03:30:00.000Z",
-            "2018-09-19T04:30:00.000Z",
-            "2018-09-19T05:30:00.000Z",
-            "2018-09-19T06:30:00.000Z",
-          ],
-          labels: {
-            style: {
-              colors: [
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-              ],
+            categories: years,
+            labels: {
+                rotate: -45,
             },
-          },
         },
         yaxis: {
-          labels: {
-            style: {
-              colors: [
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-                "#a1aab2",
-              ],
+            title: {
+                text: 'Jumlah',
             },
-          },
+            labels: {
+                formatter: function (value) {
+                    return Math.round(value);
+                }
+            }
         },
+        colors: ["#615dff"],
         tooltip: {
-          x: {
-            format: "dd/MM/yy HH:mm",
-          },
-          theme: "dark",
+            theme: "dark",
         },
-        legend: {
-          labels: {
-            colors: ["#a1aab2"],
-          },
-        },
-      };
+    };
 
-      var myChart = new ApexCharts(
+    var myChart = new ApexCharts(
         document.querySelector("#myChart"),
         options_spline
-      );
-      myChart.render();
-    })
+    );
+    myChart.render();
+});
   </script>
 @endsection
