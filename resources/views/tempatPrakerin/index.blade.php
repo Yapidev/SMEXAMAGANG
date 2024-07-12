@@ -57,7 +57,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button style="border: none; background: transparent;" type="button"
-                                                class="fs-5 text-danger cursor-pointer" onclick="confirmDelete({{ $data->id }})"><i
+                                                class="fs-5 text-danger cursor-pointer" onclick="confirmDelete('{{ $data->id }}')"><i
                                                     class="ti ti-trash"></i></button>
                                         </form>
                                     </div>
