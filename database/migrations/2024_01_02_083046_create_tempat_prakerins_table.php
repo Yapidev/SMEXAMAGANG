@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tempat_prakerins', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->text('description');
-            $table->text('address');
-            $table->string('image');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->text('address')->nullable();
+            $table->string('image')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }

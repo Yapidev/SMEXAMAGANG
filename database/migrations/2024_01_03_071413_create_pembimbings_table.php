@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('pembimbings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('tempat_prakerins_id')->constrained();
+            $table->foreignUuid('tempat_prakerins_id')->nullable()->constrained();
             $table->string('name');
             $table->string('image')->nullable();
-            $table->enum('gender', ['L', 'P']);
-            $table->enum('jurusan', ['RPL', 'AK', 'MP', 'LP', 'BD']);
-            $table->text('alamat');
+            $table->enum('gender', ['L', 'P'])->nullable();
+            $table->enum('jurusan', ['RPL', 'AK', 'MP', 'LP', 'BD'])->nullable();
+            $table->text('alamat')->nullable();
             $table->timestamps();
         });
     }
