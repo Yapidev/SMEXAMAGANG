@@ -30,12 +30,6 @@ class UpdateSiswaRequest extends FormRequest
                 Rule::unique('siswas', 'name')->ignore($siswaId),
             ],
             'class' => 'required|string',
-            'phone_number' => 'required|regex:/^08\d{8,11}$/',
-            'nisn' => [
-                'required',
-                'digits:10',
-                Rule::unique('siswas', 'nisn')->ignore($siswaId),
-            ],
             'gender' => 'required|in:L,P|string',
             'image' => 'nullable|image|max:2048',
             'alamat' => 'nullable'

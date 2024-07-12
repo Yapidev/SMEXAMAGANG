@@ -44,8 +44,6 @@ class SiswaController extends Controller
             $data = [
                 'name' => ucwords($request->name),
                 'class' => $request->class,
-                'phone_number' => $request->phone_number,
-                'nisn' => $request->nisn,
                 'gender' => $request->gender,
                 'image' => $nameImage,
                 'alamat' => $request->alamat
@@ -97,8 +95,6 @@ class SiswaController extends Controller
                 'name' => ucwords($request->name),
                 'class' => $request->class,
                 'jurusan' => $request->jurusan,
-                'phone_number' => $request->phone_number,
-                'nisn' => $request->nisn,
                 'gender' => $request->gender,
                 'image' => $nameImage,
                 'alamat' => $request->alamat ?: $siswa->alamat

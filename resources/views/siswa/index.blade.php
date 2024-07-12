@@ -52,8 +52,6 @@
                                         <th>No.</th>
                                         <th>Nama</th>
                                         <th>Kelas</th>
-                                        <th>Nomor Telpon</th>
-                                        <th>NISN</th>
                                         <th>Gender</th>
                                         <th>Alamat</th>
                                         <th>Aksi</th>
@@ -166,18 +164,6 @@
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="" class="form-label">Nomor Telpon</label>
-                                    <input type="number" name="phone_number" class="form-control"
-                                        placeholder="Contoh : 085XXXXXXXXX">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">NISN</label>
-                                    <input type="number" name="nisn" class="form-control"
-                                        placeholder="Contoh format NISN  [XXX] [YYYYYYY]">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
                                     <label class="form-label">Jenis Kelamin :</label>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="gender" id="create-laki"
@@ -285,18 +271,6 @@
                                         <option value="XIILP1">XII LP 1</option>
                                         <option value="XIILP2">XII LP 2</option>
                                     </select>
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Nomor Telpon</label>
-                                    <input type="number" name="phone_number" class="form-control"
-                                        placeholder="Contoh : 085XXXXXXXXX">
-                                    <div class="invalid-feedback"></div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">NISN</label>
-                                    <input type="number" name="nisn" class="form-control"
-                                        placeholder="Contoh format NISN  [XXX] [YYYYYYY]">
                                     <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
@@ -441,8 +415,6 @@
                                     </div>
                                 </td>
                                 <td>${siswa.class}</td>
-                                <td>${siswa.phone_number}</td>
-                                <td>${siswa.nisn}</td>
                                 <td>${siswa.gender}</td>
                                 <td data-bs-toggle="tooltip" aria-label="${siswa.alamat}" data-bs-original-title="${siswa.alamat}" title="${alamat}">${alamatDibatasi}</td>
                                 <td>
